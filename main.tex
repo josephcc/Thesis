@@ -1,0 +1,288 @@
+%for a more compact document, add the option openany to avoid
+%starting all chapters on odd numbered pages
+\documentclass[11pt,openany]{cmuthesis}
+
+% This is a template for a CMU thesis.  It is 18 pages without any content :-)
+% The source for this is pulled from a variety of sources and people.
+% Here's a partial list of people who may or may have not contributed:
+%
+%        bnoble   = Brian Noble
+%        caruana  = Rich Caruana
+%        colohan  = Chris Colohan
+%        jab      = Justin Boyan
+%        josullvn = Joseph O'Sullivan
+%        jrs      = Jonathan Shewchuk
+%        kosak    = Corey Kosak
+%        mjz      = Matt Zekauskas (mattz@cs)
+%        pdinda   = Peter Dinda
+%        pfr      = Patrick Riley
+%        dkoes = David Koes (me)
+
+% My main contribution is putting everything into a single class files and small
+% template since I prefer this to some complicated sprawling directory tree with
+% makefiles.
+
+% some useful packages
+\usepackage{times}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[numbers,sort]{natbib}
+\usepackage[backref,pageanchor=true,plainpages=false, pdfpagelabels, bookmarks,bookmarksnumbered,
+%pdfborder=0 0 0,  %removes outlines around hyper links in online display
+]{hyperref}
+\usepackage{cleveref}
+
+\usepackage{subfigure}
+\usepackage{float}
+
+% Approximately 1" margins, more space on binding side
+%\usepackage[letterpaper,twoside,vscale=.8,hscale=.75,nomarginpar]{geometry}
+%for general printing (not binding)
+\usepackage[letterpaper,twoside,vscale=.8,hscale=.75,nomarginpar,hmarginratio=1:1]{geometry}
+
+% Load basic packages
+\usepackage{balance}  % to better equalize the last page
+\usepackage{graphics} % for EPS, load graphicx instead 
+%\usepackage[T1]{fontenc}
+\usepackage{txfonts}
+\usepackage{times}    % comment if you want LaTeX's default font
+% \usepackage{url}      % llt: nicely formatted URLs
+%\usepackage{color}
+\usepackage{textcomp}
+\usepackage{booktabs}
+\usepackage{ccicons}
+%\usepackage{todonotes}
+% extras
+\usepackage{soul}
+\usepackage{setspace}
+\usepackage{amsmath}
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\abovedisplayskip{0pt}
+  \setlength\belowdisplayskip{0pt}
+  \setlength\abovedisplayshortskip{0pt}
+  \setlength\belowdisplayshortskip{0pt}
+}
+\makeatother
+\usepackage{lipsum}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{tabulary}
+\usepackage{multirow}
+\usepackage{verbatim} 
+\usepackage{multirow}
+
+\usepackage{csquotes}
+\usepackage{arydshln}
+
+\usepackage[T1]{fontenc}
+
+\usepackage{lmodern}
+\usepackage{tgheros}
+\usepackage{helvet}
+\usepackage{titlesec}
+\usepackage{etoolbox}
+\usepackage{enumitem}
+\usepackage{xspace}
+\usepackage{caption}
+
+\newcommand\systemname{}
+\newcommand\Chapter[2]{%
+    \ifstrempty{#2}%
+    {%
+        \edef\systemname{: #1}
+        \chapter[#1]{}%
+    }%
+    {%
+        \edef\systemname{: #1}
+        \chapter[#1: #2]{#2}%
+    }%
+}
+
+
+\newenvironment{tightquote}
+{\vspace{-0.3em}\begin{quote}}
+{\vspace{-0.3em}\end{quote}}
+
+
+\titleformat
+{\chapter} % command
+[display] % shape
+{\bfseries\Large} % format
+{
+\vspace{-2em} \chaptertitlename \  \thechapter \ifstrempty{\systemname}{}{\systemname}} % label
+{-1.2em} % sep
+{
+    \rule{\textwidth}{0.6pt}
+} % before-code
+[
+\vspace{-2.5em}
+] % after-code
+
+
+\definecolor{ProcessBlue}{rgb}{.75,.75,.95}
+\newcommand{\hilight}[1]{\colorbox{ProcessBlue}{#1}}
+
+
+% Provides a draft mark at the top of the document. 
+\draftstamp{\today}{DRAFT}
+
+\begin {document} 
+
+\fontfamily{phv}\selectfont
+
+\frontmatter
+
+%initialize page style, so contents come out right (see bot) -mjz
+\pagestyle{empty}
+
+\title{ %% {\it \huge Thesis Proposal}\\
+{\bf Supporting Global Context under Evolving User Intents during Data Exploration}}
+%{\bf Sensemaking and Information Foraging across Webpages under Uncertain and Evolving User Goals}}
+\author{\textsc{Joseph Chee Chang}}
+\date{}
+\Year{2020}
+\trnumber{CMU-LTI-20-005}
+
+
+\committee{
+Aniket Kittur, Carnegie Mellon University, Chair \\
+Jeffrey Bigham, Carnegie Mellon University \\
+Adam Perer, Carnegie Mellon University \\
+David Karger, Massachusetts Institute of Technology
+}
+
+%\support{}
+%\disclaimer{}
+
+% copyright notice generated automatically from Year and author.
+% permission added if \permission{} given.
+
+%\keywords{Stuff, More Stuff}
+
+\maketitle
+
+%\begin{dedication}
+%For my dog
+%\end{dedication}
+%%%%%%%%
+\pagestyle{plain} % for toc, was empty
+
+
+%% Obviously, it's probably a good idea to break the various sections of your thesis
+%% into different files and input them into this file...
+
+\begin{abstract}
+    \setlength{\parindent}{0em}
+    \setlength{\parskip}{0.8em}
+\input{abstract}
+\end{abstract}
+
+
+%\begin{acknowledgments}
+%My advisor is cool.
+%\end{acknowledgments}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0em}
+
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+
+%% Double space document for easy review:
+%\renewcommand{\baselinestretch}{1.66}\normalsize
+
+% The other requirements Catherine has:
+%
+%  - avoid large margins.  She wants the thesis to use fewer pages, 
+%    especially if it requires colour printing.
+%
+%  - The thesis should be formatted for double-sided printing.  This
+%    means that all chapters, acknowledgements, table of contents, etc.
+%    should start on odd numbered (right facing) pages.
+%
+%  - You need to use the department standard tech report title page.  I
+%    have tried to ensure that the title page here conforms to this
+%    standard.
+%
+%  - Use a nice serif font, such as Times Roman.  Sans serif looks bad.
+%
+% Other than that, just make it look good...
+
+\titlespacing\section{0pt}{8pt plus 0pt minus 0pt}{4pt plus 0pt minus 0pt}
+\titlespacing\subsection{0pt}{6pt plus 0pt minus 0pt}{3pt plus 0pt minus 0pt}
+\titlespacing\subsubsection{0pt}{4pt plus 0pt minus 0pt}{2pt plus 0pt minus 0pt}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.6em}
+
+\Chapter{Introduction and Thesis Statement}{}
+\input{overview.tex}
+
+\Chapter{Background}{}
+\input{background.tex}
+
+%\Chapter{Knowledge Accelerator}{Crowdsourced Exploratory Search}
+%\input{Chapters/KA/main.tex}
+
+\Chapter{Alloy}{Coherent Categorization with Crowds and Computation}
+\label{chap:alloy}
+\input{Chapters/Alloy/main.tex}
+
+\Chapter{Revolt}{Exploiting Disagreements For Concept Evolution in Crowd Labeling}
+\label{chap:revolt}
+\input{Chapters/Revolt/proceedings.tex}
+
+%\Chapter{SearchScape}{An Entity-centric Interactive Search Landscapes}
+%\label{chap:searchscape}
+%\input{Chapters/SearchScape/main.tex}
+
+\Chapter{SearchLens}{Capturing and Composing Complex User Interests}
+\label{chap:searchlens}
+\input{Chapters/SearchLens/main.tex}
+
+%\Chapter{Intentionally Uncertain Highlighting for Foraging during Exploratory Search}{}
+%\label{chap:highlight}
+%\input{Chapters/Highlight/main.tex}
+
+\Chapter{Weaver }{Entity-Centric Foraging across Webpages in the Browser}
+\label{chap:weaver}
+\input{Chapters/Weaver/proceedings.tex}
+
+\Chapter{Mesh}{Scaffolding Comparison Tables for Online Decision Making}
+\label{chap:mesh}
+\input{Chapters/Mesh/proceedings.tex}
+
+\Chapter{Conclusion}{}
+\label{chap:clusion}
+\input{conclusion.tex}
+
+%\Chapter{Proposed Work}{Foraging and Structuring across Webpages in the Browser}
+%\label{chap:proposed}
+%\input{proposed.tex}
+
+%\chapter{Conclusion}
+
+%\appendix
+%\include{appendix}
+
+\backmatter
+
+%\renewcommand{\baselinestretch}{1.0}\normalsize
+
+% By default \bibsection is \chapter*, but we really want this to show
+% up in the table of contents and pdf bookmarks.
+\renewcommand{\bibsection}{\chapter{\bibname}}
+%\newcommand{\bibpreamble}{This text goes between the ``Bibliography''
+%  header and the actual list of references}
+\bibliographystyle{plainnat}
+\bibliography{Chapters/Alloy/references.bib,Chapters/Revolt/sample.bib,Chapters/KA/sample.bib,Chapters/Highlight/sample.bib,Chapters/Weaver/sample.bib,Chapters/Tabs/sample.bib,Chapters/SearchScape/sample.bib,Chapters/SearchLens/sample.bib,refs.bib,Chapters/Mesh/sample.bib} %your bib file
+
+\end{document}
+

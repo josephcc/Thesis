@@ -1,0 +1,53 @@
+%!TEX root = main.tex
+
+% \textbf{Workflow3:} $HeadCast \rightarrow MergeCast \rightarrow (distributed)~TailCast \rightarrow MergeCast$
+
+The first two experiments showed that compared to automatic methods, Alloy could consistently produce
+results near the agreement of two experts with datasets containing under 100
+items. However, having only the Head Cast and the Tail Cast (Workflow 1) may not
+scale to larger datasets because the number of remaining
+clips becomes too large to fit into a single Tail Cast HIT. 
+The third experiment tests Alloy's ability to organize larger datasets with the distributed variant of 
+the Tail Cast as described in the Tail Cast Section. To compare with previous experiments, we use information seeking datasets 
+with more than 150 items for evaluation. In addition, we added the Merge Cast after the Head Cast to further
+lower the cognition load of the Tail Cast, and after the Tail Cast so that identical categories created
+based on different portion of the remaining clips could be merged.
+
+A simpler alternative way of scaling Alloy would be to organize half of the
+larger datasets using the Head Cast $\rightarrow$ Tail Cast workflow (Experiment 1, Workflow 1), and
+use the results to train a SVM classifier to organize the rest of the dataset. We will refer
+to this naive scaling method as \textbf{SVM-Scaling}.
+In addition to comparing with the four baselines described in Experiment
+1, we also implemented the naive baseline to compare with Alloy.
+
+\begin{table}
+  \centering
+% question, number of sources, number of clips, number of turkers
+  \begin{tabular}{ c r r r}
+    \hline
+	Dataset &
+	Inter-annotator &
+	Workflow3 &
+	SVM-Scaling \\
+    \hline
+	% 102
+	\textbf{Q5} & .630 & \textbf{.576} & .402 \\
+
+	% 115 - 2
+	\textbf{Q6} & .588 & \textbf{.588} & .446 \\
+    \hline
+  \end{tabular}
+  \caption{Results of Experiment 3: Scaling}
+  \label{tab:scale_results}
+\end{table}
+
+
+
+\subsection{Results}
+
+As shown in Table~\ref{tab:results} the distributed version of Alloy achieved similar
+performance as the non-distributed version even on much larger datasets; better
+and more consistent comparing to the baseline systems, and near experts
+agreement comparing to the gold-standard. In addition, the distributed workflow
+also significantly outperformed the SVM-scaling baseline
+(Table~\ref{tab:scale_results}). These results suggest that despite workers not seeing every remaining items in the Tail Cast, the distributed version of Alloy could achieve promising clustering results.

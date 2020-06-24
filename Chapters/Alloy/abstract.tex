@@ -1,0 +1,60 @@
+%!TEX root = main.tex
+
+% *** What are you trying to do? Articulate your objectives using absolutely no jargon.  What is the problem?  Why is it hard?
+% *** How is it done today, and what are the limits of current practice?
+%People generally organize complex information by identifying the salient concepts
+%and themes that effectively structure the data. However, this process often involves
+%a small group of people with deep understanding of the domain and
+%access to the entire data in order to discover
+%a good structure that is both helpful and coherent.
+% From Niki:
+% Consequently, unsupervised text processing algorithms
+% might fail to recognize the salient features that are crucial to discovering a
+% set of good abstract concepts. Crowdsourcing platforms provide a mechanism to
+% recruit human computation on demend, which can potentially be the remedy for
+% such methods.  However, abstract concept discovery and clustering can be
+% timeconsuming and cognitively taxing even for crowdworkers, as they need a
+% global understanding of the information-scape to arrive at a good level of
+% abstraction.  Further, it can be challenging to provide enough context while
+% keeping the microtasks tractable.
+% *** What's new in your approach and why do you think it will be successful?
+
+
+% original, 200 words
+%Crowd-based clustering is a new and promising field, because people can make better judgements than machines based on their deeper understanding of the information at hand. However, a global understanding is often required to identify useful categories, and it can be difficult to provide enough information in a microtask. Past work employs the crowd to process arbitrary parts of the dataset, but this lack of shared and global context can lead to incoherent results. This paper describes Alloy, a crowd-based short text clustering workflow that uses a ``\emph{sample and search}'' process to provide context beyond showing a fixed set of items. Alloy also introduces a ``\emph{cast and gather}'' framework that allows it to cast out types of microtasks for different human judgements, and gathers them by using a machine learning backbone to form coherent results. With this framework, Alloy first use the crowd as trainers for a classifier that captures the more prominent clusters, and then use the crowd again as cleaners to capture difficult items and smaller clusters. To evaluate, we clustered Web clippings, Wikipedia discussions, and research papers, finding that Alloy had higher accuracy than machine learning baselines, higher accuracy and increased efficiency compared to crowd-based approaches, and yielded comparable precision to inter-annotator agreement.
+% shortened to 150
+%Crowd-based clustering is a new and promising field, because people can make better judgements than machines with deeper understanding of the information at hand.  However, it is difficult to provide enough global information in a microtask. Past work divides the input into arbitrary parts, but this lack of shared global context leads to incoherency.  We present Alloy, a crowd-based text clustering workflow that uses a ``\emph{sample and search}'' process to provide context beyond fixed sets of items. Alloy also introduces a ``\emph{cast and gather}'' framework that allows it to cast out  microtasks  for types of  human judgements gathered by a machine learning backbone: First, Alloy uses the crowd as trainers for a classifier that captures the prominent clusters, then uses the crowd again as cleaners to capture smaller clusters. Alloy yielded comparable precision to inter-annotator agreement, outperforming machine learning and crowd-based approaches in accuracy and efficiency.
+
+This chapter describe the first of the two crowd systems in this dissertation that explored ways to provide global context in crowdsourcing. This first system focused on the task of data clustering, a common approach to data analysis. In the domain of crowdsourcing, this typically involves assigning sets of items to different crowdworkers and using human judgements to both creating categories and assigning items under them.
+Crowdsourced clustering approaches present a promising way to harness deep semantic knowledge of human computation for identifying coherent categories and clustering complex information.
+However, existing approaches have difficulties supporting the global context needed for workers to generate meaningful categories, and are costly because all items require human judgments. We introduce Alloy, a hybrid approach that combines the richness of human judgments with the power of machine algorithms. Alloy supports greater global context through a new ``\emph{sample and search}'' crowd pattern which changes the crowd's task from classifying a fixed subset of items to actively sampling and querying the entire dataset.  It also improves efficiency through a two phase process in which crowds provide examples to help a machine cluster the head of the distribution, then classify low-confidence examples in the tail. To accomplish this, Alloy introduces a modular ``\emph{cast and gather}'' approach which leverages a machine learning backbone to stitch together different types of judgment tasks. In an application-oriented evaluation, Alloy clustered were further synthesized into comprehensive overview articles using a workflow described in \cite{ka}. Results show that Alloy structures can lead to coherent and comprehensive overviews that out performed top Google search results published by experts in scenarios where there are a lack of authoritative sources.
+
+% old framing
+% 
+% We present Alloy, a clustering approach that
+% combines the strengths of human computation with machine learning to cluster complex information. 
+% Previous approaches use either crowds or computation 
+% have had difficulty dealing with
+% high-dimensional data, providing sufficient context, and enforcing global
+% constraints.
+% To address these challenges Alloy introduces the \textit{cast-and-gather} approach:
+% casting out for different types of human judgments which are gathered in a continually-improving 
+% machine backbone. This approach enables clustering to be broken into
+% multiple phases: one in which crowdworkers identify major clusters in the head
+% of the distribution which serve as training for machine to learn item similarity, and another in which crowdworkers classify the sparse and difficult items in the tail.
+% To evaluate, we
+% clustered Web clippings, Wikipedia discussions, and research papers, finding that Alloy had higher accuracy than machine learning baselines, higher accuracy and increased efficiency compared to crowd-based approaches, and yielded comparable precision to inter-annotator agreement.
+
+%\niki{reframe into key take-away ideas here, e.g., backbone etc}
+%First, crowdworkers are employed to recognize the salient
+%dimensions and discover abstract concepts for training a machine learning model
+%that predicts the similarity between documents. Then, we combine global
+%clustering results created by crowdworkers using an iterative clustering
+%mechanism that enforces global constraints.  
+
+% Who cares?
+% If you're successful, what difference will it make?   What impact will success have?  How will it be measured?
+% What are the risks and the payoffs?
+% How much will it cost?
+% How long will it take?
+% What are the midterm and final "exams" to check for success?  How will progress be measured?

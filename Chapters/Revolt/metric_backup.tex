@@ -1,0 +1,52 @@
+
+Given a dataset $D$ with $N$ items and a set of corresponding gold-standard labels $G$:
+
+\begin{subequations}
+\begin{alignat}{2}
+D = \{i_1, i_2, ..., i_N\} \\
+G = \{g_i | i \in D\}
+\end{alignat}
+\end{subequations}
+
+
+to generate the raw labels $R$, the Revolt workflow hires a group of three crowdworkers $W$ for each item in dataset $D$.
+
+\begin{subequations}
+\begin{alignat}{6}
+R = \{(V_i, E_i, c_i) | i \in D\} \\
+W = \{w_1, w_2, w_3\} \\
+V_i = \{v_{w,i} | w \in W \} \\ 
+E_i = \{e_{w,i} | w \in W \} \\ 
+c_i = mode(c_{w,i} | w \in W ) \\ 
+E_i = c_i = \phi, ~ if ~ v_{w_1,i} = v_{w_2,i} = v_{w_3,i}
+\end{alignat}
+\end{subequations}
+
+ For each item $i$, each crowdworker $w$ generates a label $v_{w,i}$ independently. If three crowdworkers did not select the same labels, they each also generate an explanation $e_{w,i}$, and assign a category name $c_{w,i}$ for the item. The final category $c_i$ is determined by simple majority voting. 
+
+Using the collected labels, we simulate the post-hoc requesters efforts using the gold-standard labels to generate the final labels $L$ for each items $i_n$ in dataset $D$:
+
+\begin{subequations}
+\begin{equation}
+L = \{l_i | i \in D\}
+\end{equation}
+
+\vspace{-2.2em}
+
+\begin{equation}
+l_i = \begin{cases}
+    w_{1,i}, & if ~ w_{1,i} = w_{2,i} = w_{3,i} \\
+    mode(g_t \in G | c_t = c_i \forall t \in D ), & otherwise
+\end{cases}
+\end{equation}
+\end{subequations}
+
+For certain items where the three crowdworkers independently choose the same label, we will use their judgement as the final label. For the categories of uncertain items, we assume the requesters will always assign the majority label found in the gold-standard labels $G$ to each of the category.
+
+For example, if the majority of items categorized with the \emph{leopards} were labeled as \emph{cats} in the gold-standard $G$, all items in the \emph{leopards} category are assigned the label \emph{cats}. 
+
+\begin{equation}
+Accuracy = \frac{\lvert \{g_i \in G | g_i = l_i, l_i \in L \} \rvert}{\lvert D \rvert}
+\end{equation}
+
+Finally, we can calculate the accuracy of the final labels $L$ against the gold-standard labels $G$ by counting the number of items that were labeled correctly, divided by the number of total items in the dataset as shown above. To simulate different amount of requesters post-hoc effort to better understand the trade-offs between accuracy and requesters efforts, we also computed a TF-IDF model using the explanations $E_i$, and cluster the uncertain items using bottom-up clustering with the crowd categories $c_i$ as constraints, and use the same evaluation metric to measure accuracy for different number of clusters. 

@@ -1,0 +1,89 @@
+%!TEX root = main.tex
+
+\begin{table}
+  \centering
+  \footnotesize
+  
+
+% question, number of sources, number of clips, number of turkers
+  \begin{tabular}{ c c c c c c c c r r}
+    \hline
+	DS &
+	InterAnnot. &
+	Workflow1 &
+	Workflow2 &
+	TFIDF &
+	Keywords &
+	LSA &
+	LDA &
+    \multicolumn{2}{r}{
+        \begin{tabular}{r r}
+            \multicolumn{2}{c}{\#clusters} \\
+            \hline
+            Alloy & exp \\
+        \end{tabular}
+    } 
+    \\
+    \hline
+	% 102
+	% ami agreement 0.6741832674112272
+	% ami score 0.674158026337653
+	\textbf{Q1} & .734 & \textbf{.759}* $\sigma$=.033  & .550* $\sigma$=.093  & .510 & .647 & .512 & .478 & 7 & 8 \\
+%	\textbf{Q1} & .7335 & \textbf{.7415} & .5190 & - & .5099 & .6465 & .5118 & .4780 & 7 & 8 \\
+
+	% 115 - 2
+	% ami agreement 0.6432978368695292
+	% ami score  0.6087555941039207
+	\textbf{Q2} & .693 & \textbf{.687}* $\sigma$=.016 & .467* $\sigma$=.046  & .534 & .562 & .537 & .506 & 8 & 8 \\
+%	\textbf{Q2} & .6928 & \textbf{.6347} & .4691 & - & .5339 & .5621 & .5373 & .5063 & 8 & 8 \\
+
+	% 96
+	\textbf{Q3} & .477 & \textbf{.468} & .425  & .390 & .440 & .467 & .442 & 7 & 7 \\
+	%\textbf{Q3} & .4768 & \textbf{.4680} & .4247 & - & .3901 & .4397 & .4674 & .4417 & 7 & 7 \\
+
+	% 116
+	\textbf{Q4} & .750 & \textbf{.727} & .633  & .673 & .676 & .704 & .603 & 14 & 16 \\
+	%\textbf{Q4} & .7499 & \textbf{.7272} & .6333 & - & .6728 & .6762 & .7038 & .6028 & 14 & 16 \\
+	
+	% 137
+	\textbf{Q5} & .630 & .576 & - & .568 & .508 & \textbf{.582} & .551 & 16 & 11 \\
+	%\textbf{Q5} & .6303 & - & - & \textbf{.5759} & .5675 & .5084 & .5824 & .5512 & 16 & 11 \\
+	
+	% 163
+	%\textbf{Q6} & .5876 & - & - & \textbf{.5875} & .4619 & .4920 & .4974 & .4560 & 10 & 11 \\
+	\textbf{Q6} & .588 & \textbf{.588}& -  & .462 & .492 & .497 & .456 & 10 & 11 \\
+	
+	\hline
+%	\textbf{Average} & .6452 & \multicolumn{3}{c}{ Alloy: \textbf{.6225} } & .5227 & .5542 & .5500 & .5034 & 10.3 & 10.2 \\
+	\textbf{AVG} & .645 & \textbf{.634} & - & .523 & .554 & .550 & .503 & 10.3 & 10.2 \\
+	\hline
+	
+	
+	\textbf{CSCW} & - &\textbf{.748} & - & .584 & .652 & .691 & .725 & 23 & 45 \\
+	
+
+%	% 137 carbon footprint
+%	\textbf{Q5} & .6303 & .? & ? & .? & .? & .? & .? \\
+%
+%	% 139
+%	\textbf{Q6} & .? & .? & ? & .? & .? & .? & .? \\
+    \hline
+  \end{tabular}
+  \caption[Evaluation results for Alloy]{Evaluation Results. * indicates mean of 11 runs using different workers.\footnotemark}
+  
+  \label{tab:results}
+\end{table}
+
+
+In the following sections, we will describe three experiments and their
+results followed by an application-oriented evaluation. For the three experiments, two workflows that uses the Gather to connect the different Casts are
+tested.  The first experiment is an external evaluation that compares Alloy
+with other approaches. We use the full workflow that consists of the Head Cast,
+the Merge Cast, and the Tail Cast to cluster the six information seeking
+datasets (Q1-Q6), and compare with previous crowd-based methods and four
+machine algorithm baselines.  The second experiment is an internal evaluation
+that tests the robustness of Alloy by using different number of workers in the
+Head Cast and the Tail Cast.  Finally, in our last experiment, we test Alloy's
+performance on two different types of datasets: Wikipedia editor discussions
+and research papers. Finally, to investigate the usefulness of the structures produced by Alloy, we used a prototype system called Knowledge Accelerator \cite{ka} to synthesize Alloy clusters for the information seeking datasets into report-styled articles and compare the articles against top Google search results.
+

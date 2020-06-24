@@ -1,0 +1,42 @@
+
+\section{Study1: Entity-Centric Foraging across Browser Tabs}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/linking.png}
+    \caption{The proposed work will use entity linking algorithms to identify Wikipedia entities mentioned in different webpages, combined with querying multiple other knowledge bases using users' original search query to improve recall.}
+    \label{fig:linking}
+\end{figure}
+
+
+The goal of Study 1 is to explore an alternative design space where the browser is able to identify and connect the same options and evidence mentioned across different webpages and use this understanding to provide better support for foraging and structuring information when users conduct exploratory search tasks. To enable this, I will develop a browser extension that incorporates existing knowledge bases and entity linking algorithms (such as \cite{spotlight,dbpedia}) and equips the browser the ability to recognize entity options from webpages. The tradeoff here is that using existing knowledge bases instead of crowdsourcing for identifying options (i.e., \cref{chap:alloy}) will allow me to develop and release a system to test this idea at scale at the cost of limited scenarios, but still support for a variety of different tasks covered by entities from Wikipedia \cite{dbpedia}, the Yelp API, or the Google Knowledge Graph API. Figure \ref{fig:linking} shows the proposed framework for identifying common options from multiple webpages in an exploratory search. For open domain knowledge bases (such as Wikipedia), I will use existing entity linking algorithms to analyze text and identify entity mentions. This will allow the system to resolve different surface forms of the same entity. To support knowledge bases where entity linking algorithms were not available but still provide search APIs (such as Yelp or Google Knowledge Graph), I propose to query each for a list of relevant entities using the original query terms the user submitted to a search engine, and use string matching to identify entity mentions in webpages.
+
+
+By enabling the browser to connect webpages through option mentions, we can help users gather and synthesize evidence about entities across multiple webpages and gradually build up a workspace that persists across browser tabs throughout the task. This approach has the potential to not only reduce the costs of keeping track of options and gathering evidence, but also enables new end-user interface designs, such as proactively showing a user how many sources mention an entity and the contexts in which it was mentioned, or propagating an users' notes and annotations across all pages an entity was cited.
+The key insight we build on is that while users aim to collect evidence for entities across multiple sources, current browsers treat each of the instances of those entities as independent. If we instead understood that the same entity was being mentioned on multiple different pages, we could better support users in understanding the contexts that entity was mentioned in and allow them to cross-reference between different sources and their own notes efficiently.
+
+
+%\section{Preliminary: The Cost Structures of Tab Usage}
+%\label{chap:tabs}
+%\input{Chapters/Tabs/short.tex}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/gather.png}
+    \caption{The gather mechanism gathers and presents evidence from different webpages when the user encountered a new entity.}
+    \label{fig:gather}
+\end{figure}
+
+
+
+Study 1 will test a proposed mechanism called ``gather and propagate'' where the system gathers relevant evidence across webpages when the user encountered a new option (Figure \ref{fig:gather}) and propagate their notes about the option to other pages where it was also mentioned (Figure \ref{fig:propagate}).
+Similar to the SearchScape system from \cref{chap:searchscape}, the gather mechanism allows users to evaluate an unfamiliar option efficiently by reviewing how it was mentioned by different sources without going through multiple webpages and look for places it was cited, but explore the benefits during reading and foraging instead of as an initial overview. The propagate mechanism allows users to re-find and re-access previously saved notes efficiently when encountering the same options again on a different webpage, lowering the cost of cross-referencing between webpages and user notes. 
+A previous system that allowed users to take note in a browser sidebar across tabs has pointed to potential scaling limitations for users to re-find and re-access previously saved notes \cite{notetoself}. Participants used two strategies to re-access their notes: browsing their lists of notes and/or filtering notes with specific keywords from memory. While these strategies might be effective for small tasks with a few saved notes, they might not scale to larger tasks. The proposed study will also explore whether the entity-centric propagation mechanism will enable efficient re-access of previously created note when conducting large complex exploratory search tasks.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/propagate.png}
+    \caption{When users take note about an option, the system propagates their notes to other webpages that also mentioned the same option for efficient re-access.}
+    \label{fig:propagate}
+\end{figure}

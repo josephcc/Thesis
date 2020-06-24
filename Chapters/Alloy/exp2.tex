@@ -1,0 +1,66 @@
+%!TEX root = main.tex
+
+
+\footnotetext[1]{We also evaluated Q1 and Q2 using the AMI metric that accounts
+    for randomness.  The inter-annotator agreements are .674 and .643,
+    respectively, and Alloy performed .674 and .609, respectively. See the
+    Evaluation Metric Section for detail.}
+
+% \textbf{Workflow2: $Head Cast$}
+% \vspace{-2mm}
+
+In this section, we examine the robustness of
+Alloy by varying the number of crowdworkers employed in the Head and the Tail Cast on datasets Q1-Q4. We start
+with having only 1 worker in the Head Cast, and evaluate performance as we hire more
+workers until we have 20. To test the two phase assumption, in a second
+condition, we switch to the Tail Cast after hiring 10 workers in the Head Cast,
+and continue to hire 1 to 10 more workers.
+This way, we can characterize the cost/benefit trade-offs in hiring different amount of human
+judgments. Further, by omitting the Tail Cast completely 
+in the first condition, we can verify
+the two phase assumption by comparing the performance of a two-phase process
+(Head Cast and Tail Cast) with a one-phase control (Head Cast only) while equaling
+the number of workers:
+
+\begin{itemize}
+    \setlength\itemsep{0.0em}
+	\item \emph{Workflow1}. The workflow with ten crowdworkers each for
+		the Head Cast and the Tail Cast. Each HIT costs 1 USD.
+	\item \emph{Workflow2}. The workflow with twenty crowdworkers and
+		the Head Cast only. Each HIT costs 1 USD.
+\end{itemize}
+
+In addition, to test how robust Alloy is to the variance of crowdworkers on Amazon Mechanical Turk, 
+we also hired eleven sets of ten different crowdworkers (a total of 440) for each 
+Head and Tail Casts for Q1 and Q2. 
+
+\subsubsection*{Results}
+
+
+In Figure~\ref{fig:numberOfTurkers}, we show the performance of
+employing different number of workers in the Head and the Tail Cast.  Initially,
+increasing the number of workers in the Head Cast shows significant
+performance improvements.  However, after gathering training data from around 10 
+workers, the performance gain from hiring additional
+crowdworkers decreases notably. Instead, performance improved significantly
+even with only a few additional crowdworkers in the Tail Cast to refine
+the clusters. Overall, 
+having
+10 crowdworkers in each of the Head and Tail Cast consistently outperformed having all
+20 crowdworkers in the Head Cast across all four questions (Table~\ref{tab:results}),
+suggesting there is significant value in the Tail Cast.
+
+For Q1 and Q2, we also ran Alloy eleven times using different
+crowdworkers, and compared the results against the gold-standard labels and also with
+each other. Comparing to the gold-standards, which have inter-annotator
+agreements of $.734$ and
+$.693$ for Q1 and Q2 respectively, Alloy produced an average NMI of .759 (SD=.016) and .687 (SD=.016), respectively.
+Further, the average pair-wise NMI score of the 11 runs are .819 (SD=.040), and .783 (SD=.056), respectively, suggesting Alloy
+produces similar results using different crowdworkers on the same datasets.
+
+%Further, the average pair-wise NMI score of the four conditions (Head Cast Q1, Q2, and Tail
+%Cast Q1, Q2) are .740 (SD=.106),
+%.758 (SD=.088), .819 (SD=.040), and .783 (SD=.056). This suggests Alloy
+%produces similar results using different crowdworkers on the same dataset. 
+
+

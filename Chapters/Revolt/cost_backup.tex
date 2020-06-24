@@ -1,0 +1,46 @@
+Many of the different baselines and conditions shared different components, such as labeling and explaining items. In Table~\ref{tab:costVars}, we formally define nine variables for detailed analysis of the different costs of each conditions: Variables $N, \mu, and~C$ describe the scale and uncertainty of the input dataset, variables $T_i, T_e, T_r, T_c$ specified the monetary cost of different crowdworker actions in terms the amount of time required, and variables $R_g, R_b$ describe the different prior and post-hoc efforts from the requesters. Using these variables, we formally describe the cost of different conditions in Table~\ref{tab:costConds}. For example, in the Revolt workflow, each of the $N$ items were labeled by crowdworkers in $T_i$ time, and each of the $\mu N$ uncertain items were explained and categorized by the crowdworkers in $(T_e+T_c)$ time. Between the three stages, there were two synchronized waiting stages taking $2T_w$ time. Afterwards, the requesters label each of the $C$ crowd categories in $R_b$ time. The total monetary cost of Revolt is therefore $N(T_i + \mu(T_e+T_c)) + 2 T_w$ plus the requester effort of $CR_b$. On the other hand, in the none collaborative Solo condition, required no Categorize Stage, but crowdworkers were asked to explain all $N$ items. The total cost of the Solo condition is therefore $N(T_i+T_e) + CR_b$.
+
+
+
+The NoGuidelines condition has both the lowest monetary cost $NT_i$ and requires no prior or post-hoc requester effort, but also performed worse than most other conditions in our evaluations due to lack of guidelines. The WithGuidelines condition also has the same lowest monetary cost while achieving high accuracy, but required the high requester effort $R_g$ of creating comprehensive guidelines.
+The Revolt workflow has higher monetary cost due to adding to the pipeline explaining $T_e$ and categorizing $T_c$ of $\mu N$ uncertain items plus synchronizing workers in two waiting stages $2T_w$. However, it also has the benefits of high labeling accuracy without the requester efforts of creating guidelines. Comparing the none collaborative conditions, the Handoff condition has lower monetary cost than the Revolt workflow by not requiring to synchronize crowdworkers between stages and omitting real-time categorization, but also lead to lower accuracy in our evaluations. On the other hand, conditions Solo and SoloClusterAll are likely to have the highest monetary cost, due to lack of mechanisms to identify uncertain items to reduce the cost of the Explain Stage, and also produced the lowest accuracy results. 
+
+\begin{table}
+\centering
+\begin{tabular}{r r l}
+     Variables &  & Definition \\
+     \hline
+     data & N  & Number of items in the dataset \\
+     & $\mu$ & Proportion of uncertain items \\
+     & C & Number of categories or clusters \\
+     
+     worker & $T_i$  & Time to label a single item \\
+     & $T_e$ & Time to explain a single item \\
+     & $T_r$ & Time to relabel a single item \\
+     & $T_c$ & Time to categorize a single item \\
+     requester & $R_g$  & Time to generate guidelines \\
+     & $R_b$ & Time to label a single category 
+\end{tabular}
+\caption{Variables describing the scale and uncertainty of the input dataset, and efforts from crowdworkers and the requesters.}
+\label{tab:costVars}
+\end{table}
+
+
+\begin{table}
+\centering
+\begin{tabular}{r l}
+     Conditions & Cost \\
+     \hline
+     NoGuidelines & $N T_i$ \\
+     WithGuidelines & $N T_i + R_g$ \\
+     Revote & $N (T_i+u(T_e+T_r)) + 2T_w$ \\
+     Revolt & $N (T_i+u(T_e+T_c))+2T_w+CR_b$ \\
+     Handoff & $N (T_i+uT_e)+CR_b$ \\
+     SoloClusterAll & $N (T_i+T_e)+CR_b$ \\
+     Solo & $N (T_i+T_e)+CR_b$ \\
+\end{tabular}
+\caption{Total cost of different baselines and conditions.}
+\label{tab:costConds}
+\end{table}
+
+

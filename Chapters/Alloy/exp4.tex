@@ -1,0 +1,61 @@
+%!TEX root = main.tex
+
+% \textbf{Workflow1:} $HeadCast \rightarrow MergeCast \rightarrow TailCast$
+% \vspace{-2mm}
+
+%Alloy was initially designed to organize corpora of ideas that answer a specific questions described using short text clips.
+In this experiment, we use the same distributed workflow to test Alloy 
+using the Wiki and CSCW datasets as described in the Dataset Section, in order
+to test how Alloy generalizes to other types of data. These datasets contain long
+academic documents or editorial discourses that are infeasible to present multiple items to the crowdworker in one HIT.
+Instead, we show a small portion of each item in the datasets to the crowdworkers.
+For each item
+in the Wiki dataset, we display the thread-starter post and the first two replies. For the CSCW dataset,
+we present the abstract
+section of each paper, and compare results with the official conference sessions. Machine baselines were however given
+access to all of the text of the paper and the full discussion threads in order to provide a strong test of Alloy's approach.
+
+%\niki{move this to discussion if you want}
+%We acknowledge that organizing long documents is a limitation of Alloy.
+%However, this limitation also presents in most previous crowd-based approaches.
+
+\subsubsection*{Results}
+
+% \subsubsection{CSCW Conference Papers}
+
+For the CSCW dataset, Alloy outperformed all machine baseline
+systems with \emph{.748} NMI score using conference sessions as the gold standard Table~\ref{tab:results}.
+The Keyword baseline outperformed the TF-IDF baseline (\emph{.652} vs \emph{.584}), showing
+that the crowdworkers are extracting valuable keywords in the Head Cast, despite that
+research papers may be difficult or impossible for crowdworkers to understand. On the other hand,
+Alloy produced 24 categories out of 135 abstracts, more than all other datasets. One possible
+assumption is that it may be more difficult for novice workers to induce abstract categories
+when organizing expert dataset, leading to higher number of more lower level categories in
+the outcome.
+
+% Note that even though only the abstract sections were available to the crowdworkers,
+% we used the full articles as the input to the baseline systems to improve their performance,
+% and explored multiple parameter settings report their best results.
+
+% \subsubsection{Wikipedia Editor Discussion Threads}
+
+For the Wiki dataset, the NMI score between annotators was \emph{.604}, which is comparable
+to the two other large datasets Q5 and Q6. Comparing to the two sets of expert
+labels independently, Alloy's output measured \emph{.528} and \emph{.507}.
+Compared to all previous results, Alloy seemed to perform less favorably on this
+dataset. As mentioned in the Dataset Section, the raters found the this dataset the most
+difficult to organize, as there are many different valid structures that the two
+annotators were unable to reach an agreement 
+also hints that the space of valid solutions may be larger on this dataset. 
+In addition, we only showed the first three comments of
+each discussion to the crowdworkers, whereas the annotators and the machine baselines
+have access to the full discussion. 
+We acknowledge length of items is a limitation, and will discuss in detail in
+the Discussion Section.
+
+%This is potentially a substantial disadvantage to
+%Alloy, as the full discussions can contain up to more than a hundred comments.
+%Unlike the abstracts of research papers, the first three comments might not be
+%representative enough of the discussions.
+
+

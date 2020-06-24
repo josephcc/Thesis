@@ -1,0 +1,98 @@
+%!TEX root = main.tex
+
+%Previous crowd clustering methods evaluated on online information seeking dataset
+%collected from Quora, and online collaboration data collected from Wikipedia. We
+%also evaluate our system using similar datasets. In addition, we also test our
+%system using a set of research paper abstracts. In this Section, we will discuss
+%the three datasets used for evaluation.
+
+% \jeffrz{I know this section came out of some of the reviewer stuff from last time, but maybe you can integrate it into the experiments section too, like before your validity test. it could probably be shorter too}
+% \joseph{shortened and move the part about low agreement to discussion}
+
+In order to evaluate Alloy, we compared it to other machine
+learning and crowdsourcing clustering approaches in three different contexts:
+information seeking, Wikipedia discussions, and research papers.
+These contexts all involve rich, complex data that pose challenges for
+automated or existing crowd approaches. Below we describe each dataset and how
+we either generated or collected gold-standards.
+
+%\vfill
+
+\subsection{Information Seeking Datasets}
+\label{chap:info_seek_datasets}
+
+We picked five questions asked on popular Q\&A forums (e.g.,
+Quora, reddit, and Yahoo! Answers) that covered a diverse
+range of information needs. We then posted these questions to Amazon Mechanical
+Turk (AMT), and asked each crowdworker to find 5 webpages that best answered
+the questions in Table \ref{tab:datasets}. The top sources were sent to workers to highlight clips
+that would help answer the question via an interface similar to that
+described in \cite{kittur2013costs}.  The first four datasets (Q1 to Q4) collected consist of 75 to
+100 clips, extracted from 7 to 19 webpages using 12 to 19 crowdworkers.
+In addition, we also collected two datasets with more than 150 clips
+(Q5 and Q6) by gathering more clips from the sources.
+
+To generate gold standards, two graduate students clustered each dataset
+independently.
+Raters were blind to Alloy's clusters, and no discussion on
+clustering strategies nor predefined categories were made prior to the
+process. 
+Raters initially read every item in the dataset to build global
+understanding before they started organizing. Conflicts between raters were resolved though discussion. 
+The first author participated in labeling two (out of the seven)
+datasets, but was always paired with another annotator outside of the research group. 
+To measure inter-annotator agreement, we used the symmetric NMI
+metric as described in the previous section.
+
+
+% as it better deals
+% with issues such as differing cluster sizes, large numbers of clusters, and
+% computational complexity than the clustering adaptation ($K_{max}$) of the
+% commonly used Cohen's kappa \cite{manning2008introduction,reilly2005rapid}. 
+
+The agreements between raters are shown in Table~\ref{tab:results}. The datasets
+for ``\emph{How do I unclog my bathtub drain?}'', ``\emph{How do I get my
+	tomato plants to produce more tomatoes?}'' and ``\emph{What are the best day trips possible from Barcelona?}'' had high agreement between the
+two annotators of 0.7 to 0.75 NMI. For
+the ``\emph{What does a planet need to support life?}'' dataset, the agreement
+was significantly lower (0.48). We kept this dataset to show the limitations of the proposed method, and we will discuss further in later sections. For the two larger datasets Q5 and Q6, the agreement scores were around 0.6.
+
+%Even though we think both
+%independently created labels are valid ways of organizing this dataset, it also
+%suggests that a flat, or even a tree, structure might not be sufficient to
+%accurately organize this dataset. We return to this interesting challenge in
+%the discussion section. The final gold-standard labels were created by the two
+%judges labeling the entire datasets together for the second time, and reaching
+%agreement through discussion.
+
+\subsection{Research Papers}
+
+Since some of the questions in the above dataset were about common daily life problems, an open question is whether crowd judgements were  based on workers' prior knowledge or the context we provided them. To evaluate the system using more complex data where workers would likely have little prior knowledge we turned to research papers from the 2015 CSCW conference. For this dataset we used the official conference sessions as the gold standard for evaluation. The intuition is that
+conference organizers would place similar papers together in the same session. We acknowledge that the objectives
+of organizing conference sessions are not entirely the same as Alloy; most notably, conference session planning requires schedule conflict resolution and fixed size sessions. However, session co-occurrence represents valuable judgments from experts
+in the community about which papers belong to a common topic, and even though each cluster
+is smaller in size (e.g., 3-4 papers per session) we can look at whether papers put together
+by experts are also put together by Alloy and the other baselines \cite{chilton2014frenzy}.
+
+\subsection{Wikipedia Editor Discussion Threads}
+
+Wikipedia relies on its editors to coordinate effectively, but making sense of the archives of editor discussions can be challenging as the archives for a single article can consist of hundreds or thousands of pages of text. We use as a dataset the discussion archives of the \emph{Hummus} article, a 
+popular yet controversial article, and use the discussion threads as the set of documents. The talk page consists of 126 discussion
+threads about various issues of the main articles that spans over the past 10 years (Table~\ref{tab:datasets}).
+Two annotators read the main article and the full talk threads
+before they started the labeling process. The NMI score between the two
+annotators was \emph{.604}, which is comparable to the two other large
+datasets Q5 and Q6. 
+
+Wikipedia data can be more difficult to organize than previously
+mentioned datasets, because it can be organized in very different ways, such as
+topics, relations to the main article sections, and mention of Wikipedia guidelines \cite{andre2014crowd}.
+The annotators also had a hard time coming up with a gold standard through
+discussion, and found both their categorization solutions to be valid. Therefore,
+instead of creating a single gold standard, we report the NMI scores between
+Alloy's output and each of the annotators.
+
+% It can also be difficult to determine the actual motivations
+% behind the surface issues. For example, changing the image to a different serving style
+% can actually be motivated by arguing the origin of Hummus.
+

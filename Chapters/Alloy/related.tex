@@ -1,0 +1,155 @@
+%!TEX root = main.tex
+
+There have been a variety of methods proposed in the literature, which differ
+in many ways from ours.
+%Make this a little bit more like an introduction than a lame phrase
+
+\subsection{Word Sense Disambiguation}
+
+Because human languages can be fuzzy and ambiguous, their exists a large amount 
+of uncertainty around the meaning of a particular word when processing it. Word sense 
+disambiguation (WSD), an open problem in natural language processing, attempts to solve
+this by mapping ambiguous words to their intended concepts.  In 1995, Yarowsky proposed a novel
+unsupervised WSD algorithm that rivals state-of-the-art supervised algorithms
+\cite{yarowsky1995unsupervised}. The algorithm was based on the hypothesis of
+``one sense per collocation'', which suggests a member of a set of keywords in
+context is often sufficient to determine the sense of the nearby target word.
+For example, the two sets of keywords for the word ``\emph{plants}'' are
+``\emph{growth}, \emph{height}, \emph{flower}, \emph{fruit}, \emph{space}''
+(for the \emph{life} sense) and ``\emph{car}, \emph{union}, \emph{equipment},
+\emph{assembly}, \emph{nuclear}, \emph{job}'' (for the \emph{manufacturing}
+sense).  Other research has suggested that when clustering documents using
+topics or concepts, %a little confused about this word use%
+a few informative keywords can yield good results
+\cite{huang2006text}. More recent research has begun to explore the
+possibility of representing words as contextual vectors
+\cite{mikolov2013linguistic}, and represent short texts using distributional
+semantic vectors \cite{socher2012semantic,socher2013recursive}. We designed our
+method based on these observations, and used the crowd to identify important
+keywords from the clips to improve clustering performance.
+
+
+\subsection{Topic Modeling and Latent Semantic Analysis}
+
+% move citations for LDA / LSA to settings and/or eval
+
+In natural language processing, topic modeling is the process of using
+unsupervised statistical models to discover abstract topics from a large set of
+documents. In particular, Latent Dirichlet Allocation (LDA)
+\cite{blei2003latent} is a widely used generative model under which each
+document is generated with multiple topics, and each topic is a probability
+distribution of words.  It is difficult for topic models to perform well for
+collections of short text, since LDA relies on counting words in the documents
+as probability distributions to discover topics.  In our work, we focus on
+organizing small web clips that typically have a single topic, contradicting
+the assumptions of the LDA generative model. On the other hand, latent semantic
+analysis (LSA) ( Cite) seems more suitable for our gaol. It reduces word vector
+dimensions by grouping words together to form concept dimensions based on their
+occurrence in similar documents.
+
+To compare the proposed method against these natural language techniques, we
+also clustered the dataset using LSA and LDA as baseline systems in our
+evaluation.
+
+\subsection{Clustering High-dimensional Text Data}
+
+With the high dimensionality of the word vector space, the distance, or
+similarity, between two documents is diluted and hence unreliable. Additionally,
+different ways of clustering the corpus may exist in multiple different
+subspaces, i.e., using a subset of all dimensions, and most of them could be meaningless for the given context %hmmm, explain subspaces a little more%
+\cite{kriegel2009clustering}. Consider a collection of snippets about planets in
+the Universe.  One trivial way of organizing this collection is to cluster
+snippets according to the planetary systems involved.  However, many other ways
+of clustering may also make sense, such as the mass of the planets, the
+temperature of the planet, or even the writing styles of the clips or the
+number of typos in the clips.
+
+People, on the other hand, seem to be capable of organizing documents into
+clusters appropriately.  Given enough background information, people are
+generally good at identifying the key idea of the documents, and create
+clusters that are appropriate for the given context \cite{medin1978context}. In
+our work, we employ crowdworkers to cluster
+complex textual data, utilizing different techniques to provide them with background
+information while they perform the task. 
+
+\subsection{Clustering based on Human Computation}
+
+Research efforts have also focused on the application of human computation 
+to address the issues with machine only approaches. Two major approaches have
+been taken to make use of human computation to improve clustering and 
+classification of complex data. %hmm this is a bit of a weak paragraph %
+
+The first approach focuses on using crowdworkers to label training data for
+machine learning models, rather than relying on domain experts. 
+Approaches related to this category includes creating labeled dataset
+using the crowd \cite{snow2008cheap}, crowd base evaluation
+\cite{callison2009fast}, and extracting accurate labels based on redundancy
+\cite{ipeirotis2010quality}. We took a similar approach for the first part of
+the system by using crowdworkers to not only help us create labels
+for training an machine learning model, but to also extract salient words as features.
+
+The second approach focuses on designing a crowd workflow that breaks down the
+clustering problem into microtasks for novice crowdworkers, and combining the
+results to form a complete answer.  Chilton et al. explored using the crowd to
+create hierarchical clusters of concepts represented in short snippets of text
+\cite{chilton2013cascade}. The task is broken down into three microtasks:
+Generate, SelectBest, and Categorize. These microtasks focus on creating
+semantic descriptions for clusters, finding the abstraction levels of the
+descriptions, and grouping clips into the clusters. The goal is to produce a
+hierarchical structure of the dataset. The error rates in the hierarchical
+structure are 13\% to 27\%.  In our case, we also rely on crowdworkers to
+generate semantic descriptions for the clusters. However, instead of building a
+hierarchical structure, we focus on finding coherent clusters at a similar
+level of abstraction for the given context.
+%This last phrase is also a little confusing, what do you mean by coherent level? J: changed to 'similar'%
+
+To explore the design of microtasks for performing distributed clustering using
+the crowd, Andr\'e et al. (2014) investigated different approaches to present
+context to crowdworkers for clustering complex concepts represented in short
+text \cite{andre2014crowd}. Empirical study shows that providing context by
+presenting multiple items to each crowdworker leads to significant improvements
+on precision, recall, and accuracy of concept description.  The reported
+precision rates range from 40\% to 65\%, and recall from 35\% to 82\%. We adapt a
+similar approach of presenting multiple items from the datasets to provide
+context.  Furthermore, to provide even more context, we also allow the
+crowdworkers to randomly sample clips from the dataset, and to search the
+entire dataset using keywords.
+
+Besides using the crowd to cluster complex information, researchers
+have also investigated the timing for conducting clustering in the information foraging
+process \cite{kittur2013costs}. Participants were asked to gather information
+online, and create categories, attributes and values for the gathered
+information.  They were split into groups, and asked to created structures at
+different stages.  Empirical study shows that by eliciting structure after all
+the information is gathered leads to better structured data, as oppose to
+creating structures while gathering information, when the participants have not
+yet developed richer mental models.  Therefore, we focus on organizing the
+datasets after the gathering process, as oppose to during the gathering
+process.
+
+Huang and Mitchell proposed an interactive system for classifying emails
+\cite{huang2006text}. The proposed method is an expectation maximization (EM)
+algorithm that incorporates the contents of the documents and also user
+feedback. Similar to previous findings, they also assume that a few important
+words may be sufficient to determine the category of the documents. The system
+assumes a generative model in which each word in a documents is either
+generated from one of the topic model of each category, or from a global
+general topic. The user can provide feedback by associating keywords with a
+category or associating a document with a category.  The feedback is
+incorporated in the EM process as partially revealing the hidden values.
+Different from our work, the system is designed for a single user to organize
+their own documents, and to provide clustering results as suggestions based on
+the user's preferences. We focus on using statistical models and designing
+microtasks to employ the crowd to solve this problem.
+
+Other approaches to crowd clustering have tried to address the scaling issues
+by using computation, applying approaches such as partial clustering
+\cite{yi2012crowdclustering}, learning similarity metrics through triad-wise
+comparisons \cite{tamuz2011adaptively}, or using matrix completion
+\cite{yi2012semi} to reduce the number of labels needed from workers. Unlike
+these approaches, ours 1) deals with rich textual data and 2) uses a two-step
+process. Crowds are used to first guide machines in learning how to
+classify the data and then after the machine classifies what it can with high
+probability, crowds are again used to ``clean up'' the data that is difficult
+to classify.
+

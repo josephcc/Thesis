@@ -1,0 +1,80 @@
+\definecolor{mygray}{HTML}{aaaaaa}
+
+
+\begin{table*}
+  \centering
+  \footnotesize
+% question, number of sources, number of clips, number of turkers
+  \begin{tabular}{p{1\columnwidth}  p{0.12\columnwidth} p{0.12\columnwidth} p{0.4\columnwidth}}
+  
+	
+	Systems: &
+	{\SYSTEM} &
+	Baseline& 
+	T-test
+	\\
+	
+	\arrayrulecolor{black}\hline
+	
+	Number of unique webpages the tool was accessed from &
+    12.00 \newline $\sigma$=4.81 &
+    5.08  \newline $\sigma$=3.64 &
+    t(22)=3.97, p=0.0006$^{***}$
+    \\
+    
+	\arrayrulecolor{mygray}\hline
+    
+	Number of evidence (notes or clips) added to an entity &
+    18.42 \newline $\sigma$=12.65 &
+    6.50  \newline $\sigma$=5.38 &
+    t(22)=3.00, p=0.006$^{**}$
+    \\
+    
+    \hline
+
+	Number of unique webpages evidence was collected from &
+    5.33 \newline $\sigma$=2.58 &
+    3.40 \newline $\sigma$=1.89 &
+    t(22)=2.45, p=0.02$^{*}$
+    \\
+    
+    \hline
+    
+	Number of unique entities saved in the system &
+    8.92  \newline $\sigma$=6.49 &
+    13.42 \newline $\sigma$=5.94 &
+    t(22)=-1.77, p=0.09
+    \\
+    
+    \hline
+    
+	Number of unique entity cards accessed by hovering &
+    29.33 \newline $\sigma$=15.62 & 
+    \textit{n/a} &
+    \\
+    
+    \hline
+    
+	Number of unique webpages each entity card accessed from &
+    4.33 \newline $\sigma$=1.40 &
+    \textit{n/a} &
+    \\
+    
+    \hline
+    
+	Number of times an entity card was accessed by hovering &
+    128.75 \newline $\sigma$=72.11 &
+    \textit{n/a} &
+    \\
+	
+	\arrayrulecolor{black}\hline
+	
+	&
+    N=12 &
+    N=12 &
+    \\
+	
+  \end{tabular}
+  \caption{Evaluation results for our primary domain of Travel Planning -- Mean statistics of participant behavior using \SYSTEM~and a Baseline system with an in-situ notepad.}
+  \label{tab:results_main}
+\end{table*}

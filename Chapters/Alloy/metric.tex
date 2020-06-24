@@ -1,0 +1,78 @@
+%!TEX root = main.tex
+% \niki{maybe the name of this section should be Evaluation instead of NMI}
+Unlike evaluating a classification task, which would typically be based on
+the precision and recall of pre-defined classes, evaluating clusters is not as
+straightforward due to the potentially different number of classes in the gold-standard and 
+the system output. For example, high precision can be achieved by simply having more
+clusters in the output and the mapping between them.
+To address this, we use the normalized mutual information metric (NMI), which is a symmetric measurement sensitive to both the
+number of clusters, and the precision of each cluster.  Specifically, it
+compares all possible cluster mappings to calculate the mutual information, and
+normalizes by the mean entropy so that the numbers are comparable between different
+datasets:
+
+% divide it by the mean entropy of the two sets of clusters so that results
+% across different datasets are comparable, and unbiased by the innate complexity
+% of different questions.
+
+% For example, the output of the system and the gold standard
+% can have different number of clusters. They can either be many-to-one mappings
+% (mapping multiple fine-grained clusters to a more abstract cluster), or
+% clusters created based on different concepts. It is also not as informative to
+% use precision and recall to evaluate clustering results. For example, the
+% purity metric computes the average precision of all clusters in the system
+% output, however, maximum purity can be easily achieved if each clip is its own
+% cluster. Instead, we use the Normalized Mutual Information from Information
+% Theory and Information Retrieval to evaluate the difference between system
+% output and the gold-standard clusters \cite{manning2008introduction}.
+
+\vspace{-3mm}
+\begin{equation}
+NMI(\Omega, C) = \frac{I(\Omega, C)}{0.5 * [H(\Omega) + H(C)]}
+\end{equation}
+\vspace{-2mm}
+
+where $\Omega$ is the output clusters and $C$ is the gold-standard clusters.
+The mutual information $I$ is defined as:
+
+
+\vspace{-3mm}
+\begin{equation}
+	\begin{split}
+I(\Omega, C) & = \sum_k \sum_j P(\omega_k \cap c_j) log \frac{P(\omega_k \cap c_j)}{P(\omega_k)P(c_j)} 
+% \\
+  %           & = \sum_k \sum_j \frac{|\omega_k \cap c_j|}{N} log \frac{N|\omega_k \cap c_j|}{|\omega_k||c_j|}
+	 \end{split}
+ \end{equation}
+\vspace{-2mm}
+
+where $\omega_k$ and $c_j$ denotes each of the clusters in $\Omega$ and $C$,
+respectively. The probability $P(\omega)$ of item set $\omega$ is defined as
+$|\omega|/N$, where N is the number of total items. Finally, the mutual
+information is normalized by the mean entropy of $\Omega$ and $C$, so that the
+scores are comparable across datasets.
+To give some intuition, given $w$ that maps to a gold-standard
+cluster $c$, we can calculate the precision by $P(w \cap c) / P(w)$ and recall
+by $P(w \cap c)/P(c)$, and the metric considers both with $P(w \cap c)/P(w)P(c)$.
+However, in reality it may be difficult to obtain such mappings, and the metric simply
+sums up scores of all possible mappings weighted by probability $P(w \cap c)$.
+
+We use NMI for it is widely found in the literature for clustering evaluation.
+A more recent study found that it might favor datasets with more clusters, and
+proposed a variant that adjusts for randomness (AMI,
+\cite{vinh2009information}).  We acknowledge this is a potential limitation,
+but found that the number of clusters Alloy produced were quite close to the
+gold-standard (average 10.3 vs 10.2), suggesting the concerns may be minimized.
+To be on the safe side, we also measured Alloy's performance using AMI on two
+datasets and found similar results. 
+
+
+% Finally, the entropy $H$ is defined as:
+
+% \begin{equation}
+% 	\begin{split}
+% H(\Omega) & = - \sum_k P(\omega_k) log P(\omega_k) \\
+%           & = - \sum_k \frac{|\omega_k|}{N} log \frac{|\omega_k|}{N}
+% 	\end{split}
+% \end{equation}
+

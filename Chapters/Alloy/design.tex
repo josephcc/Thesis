@@ -1,0 +1,145 @@
+%!TEX root = main.tex
+
+% In this section, we discuss the reasoning behind the design of the proposed method.
+% We will present the design patterns utilized in three HIT
+% interfaces, and how these designs help in producing better clustering results.
+
+\joseph{new}
+In addition to the system itself, we identified two higher level design patterns
+that could be useful for future crowd-driven information systems.
+% First, a Two Stage approach that uses
+% machine algorithms for scale and employs the crowd for quality.
+% Second, a Cast and Gather framework that connects multiple stages for incremental improvements.
+% Finally, a Request for Context
+% pattern that allows crowdworkers to freely explore the corpus for context.
+
+% 
+% \subsection{Two Stage Clustering}
+% A key difference from previous work on crowd clustering is our two-stage model
+% of clustering. 
+% %There is a conflict between providing sufficient context
+% %for identifying categories in a skewed distribution and the limited context capacity of 
+% %microtasks that are suitable for posting to online crowdsourcing marketplaces such as Amazon Mechanical Turk. Further, i
+% It is common for a collection of information to be not evenly distributed across topics but instead
+% follow a highly skewed distribution \cite{white2007studying}.
+% In such cases the head of the topic distribution
+% contains a disproportionate number of clips, and once a human has labeled a few
+% of these clips it is inefficient to continue using human labor to finish
+% labeling them as automated methods can do a reasonably good job.  Conversely,
+% the tail of the topic distribution contains topics with few clips,
+% and expending resources to train a machine learning algorithm to
+% identify these sparse topics is less advantageous, while it is comparatively
+% easy for humans to classify these clips.  
+
+% Previous crowdsourcing research has shown success in using the crowds to capture uncommon cases in a long tailed distribution to improve inline answers in Web search engines \cite{Bernstein:2012:DAS:2207676.2207710}. We extend this approach further so that
+% humans can also classify the clips for which the machine classifier has low
+% confidence. 
+
+
+\subsection{Sample and Search}
+Previous studies show that presenting multiple items from a collection can help
+provide context to human workers \cite{medlin1978}, increasing the likelihood
+of obtaining better clusters.  However, it can be difficult to determine how
+much context is sufficient and how to produce a good sample that captures the distribution of information in the larger dataset. 
+%For example, if the sample size is too small, and
+%the presented items are too similar, the workers may group all items into a
+%very general class (e.g., \emph{tips}), or overly specific classes.
+In one instance of previous work up to 10 items were presented to each
+crowdworker to ensure a better chance of sampling both
+similar and dissimilar items from the dataset \cite{andre2014crowd}.
+We take a different approach and ask crowdworkers to identify coherent categories by
+presenting fewer items, but allowing them to replace each item by random sampling
+from the entire dataset until they are confident that all items are in different
+categories in the final output.
+This process requires building some degree of global understanding of the
+information space, and we give workers the freedom and motivation to explore the
+dataset until they have enough context. After obtaining the seed items by repeated sampling,
+we ask crowdworkers to identify keywords in each clips to search for related items in the dataset.
+This process takes advantage of people's ability to find new information \cite{pirolli1999information}. To create a familiar experience, we allow the workers to freely change their query terms and show the search results in real time. This way they can refine their searches just as when conducting online information foraging (cite query reformulation), and we also have better chance of obtaining better keywords and clusters.
+
+
+
+\subsection{Cast and Gather}
+Using a multiple-stage approach with different types of microtasks
+can make it difficult to fuse together the different crowd judgements to form
+a coherent result.
+A key element to our approach in \textit{casting} for category judgments in
+different ways is that we have a unifying mechanism to \textit{gather} them back
+together.  For example, throughout our process we cast for human category
+judgments in very different ways, including having people identify seeds,
+classify items relative to those seeds, merge categories, identify categories
+as trash, create new categories, and classify the tail of the distribution.
+Instead of creating ad-hoc links between these judgments we propose
+using a unifying gathering mechanism composed of a machine learning backbone
+(in our case, a hierarchical clustering algorithm) which translates the
+different \textit{casted} judgments into similarity strengths used as the basis of
+clustering.   We believe this \textit{Cast and Gather} pattern may be useful as a
+way to conceptualize the relationship between machine algorithms and crowd
+judgments for a variety of tasks. While the algorithm used as the unifying
+backbone may differ across task needs, the important core features of the hierarchical
+clustering algorithm we used include: 1) it can
+be done iteratively, so that many worker judgments in many different stages
+could be repeatedly fed into the same algorithm; 2) it uses a global similarity
+space, so that different judgments can all be mapped into similarity scores;
+and 3) it is distributed, such that scores between pairs of items can be
+updated independently of other items.
+
+
+%\subsection{Global Context through Self-selected Sampling}
+%\niki{I don't really understand this paragraph. maybe move this and the next
+%    section to method? this fits in with the finding seeds part and the next
+%    section with keyword part.}
+%Previous studies show that presenting multiple items from a collection can
+%help provide context to human workers \cite{medlin1978},
+%increasing the likelihood of obtaining better clusters.  However, it can be
+%difficult to select such items. On one hand, if the presented items are too
+%similar, the workers may group all items into one big cluster using a very
+%general and abstract class, e.g., \emph{answers} or \emph{tips}.
+%Alternatively, they may also create multiple clusters that effectively divide
+%the items presented, but they may be too fine-grained in the global context. On
+%the other hand, if the presented items are very different from each other
+%(e.g., one item from each desired class) the workers may not be able to
+%recognize the salient features that help to determine cluster membership, due
+%to the limited number of examples for each abstract class.
+%
+%In one instance of previous work up to 10 items were presented to each
+%crowdworker \cite{andre2014crowd}, to ensure a better chance of sampling both
+%similar and dissimilar items from the dataset. The amount of data presented can
+%be overwhelming at times, especially if the items are not easily understood at
+%a glance. Further, it can also be ineffective if the datasets contain
+%many abstract classes. In the first Phase of our proposed method,
+%we take a different approach by presenting
+%the workers with fewer items from the dataset, but allowing them to replace
+%each item with a clip randomly sampled from the dataset. The instructions of
+%this exploratory process is to find a few items each from a different
+%conceptual class, which requires some degree of global understanding of the
+%dataset.  This way, the workers have the freedom and motivation to explore the
+%dataset, and build up their mental model of the information-scape in the
+%progress. The process stops when the crowdworker feels that they have sufficient
+%global knowledge to judge the seed items at hand as belonging to different clusters in the
+%final output. Overall, this design aligns nicely with the goal of the proposed
+%method.
+%
+%\subsection{Keyword Sampling and Feedback}
+%
+%To find other clips similar to the seed clips by human judgements, we
+%built on an intuition
+%developed by manually clustering clips ourselves, in which we found that we frequently
+%categorized clips based on a small number of keywords.  However, finding those
+%keywords is itself a challenge for automated methods, as the same scarcity
+%problems come into play. Instead, we developed a sampling and feedback method
+%for crowdworkers to identify good keywords, in which they simply clicked on a
+%keyword to select it and immediately saw feedback in terms of the most related
+%clips identified by the machine.  They could then refine their keywords to
+%improve the relevancy of the returned clips. This helped crowdworkers be more
+%efficient about identifying relevant clips, and also served to gather the most
+%salient features for training a similarity model in the later stage.  
+%\joseph{move to method?} Also, by
+%having crowdworkers labeling clips with both positive and negative tags, we can
+%gather both positive and negative examples for training. Further, by labeling
+%items from search results, crowdworkers are labeling the edge cases for the
+%negative examples (i.e., superficially similar but conceptual different clips).
+%This also fits well with the idea behind SVMs, which rely on the edge cases to
+%find a good decision boundary.
+%\joseph{move the SVM part to method}
+%

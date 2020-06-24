@@ -1,0 +1,227 @@
+%!TEX root = main.tex
+
+
+In this chapter, we took a step towards tackling
+the problem of clustering high-dimensional, 
+short text collections by combining techniques from natural language processing and
+crowdsourcing.  By using a two-phase process connected by a machine learning backbone,
+our proposed method compensates
+for the shortcomings of crowdsourcing (e.g., lack of context, noise) and
+machine learning (e.g., sparse data, lack of semantic understanding). As part of the system we introduced an approach aimed at providing greater context to workers by transforming their task from clustering fixed subsets of data to actively sampling and querying the entire dataset. 
+
+We presented three evaluations that suggest Alloy performed better 
+and more consistently than automatic
+algorithms and a previous crowd method in accuracy with 28\% of the cost
+(Exp.1), is robust to poor work with only 20 workers (Exp.2),
+and is general enough to support different types of input (Exp.3).
+Qualitatively, we noticed Alloy often produced better names for categories than
+machine algorithms would be capable of, including names not in the text (e.g., a cluster 
+including items about \emph{smart thermostats} and \emph{solar panels} was
+named ``\emph{Home Improvements}'' which was not in the actual text).
+
+% On average, Alloy produced results
+% with .623 against the gold-standards, .023 lower than the inter-annotator
+% agreement,
+%which is higher than all four baseline systems that ranged from
+% .503 to .554 (Table~\ref{tab:results}).
+
+%The first experiment shows that based on
+%manually created gold-standard data outperformed four automatic /
+%semi-automatic baseline systems, and produced clusters with normalized mutual
+%information scores comparable to human inter-annotator agreement.  
+%Alloy also performed better comparing to state-of-the-art crowd-based method 
+%on accuracy using 28\% of the cost.
+%Compared to some previous crowd-based methods, which rely on earlier
+%crowdworkers to conceptualize or generate categories for each items based on
+%limited context, our method based on crowdworkers ``voting'' on whether each
+%item pair should be in the same cluster is less prone to a few workers making
+%bad judgements or creating general but not informative clusters (e.g.,
+%\emph{answers} or \emph{tips}). Previous methods also suffer from scaling
+%problems as they require each item to be labeled by at least one crowdworker.
+%In Phase A of the proposed method, we employ crowdworkers to select salient
+%keywords from a small set of clips as general features that can be
+%used to cluster clips that are not seen by any crowd worker.
+%
+%In the second experiment, we test the robustness and the strength of the
+%two-phase approach of the proposed method by using different number of
+%crowdworkers at different phases. Results show even with only a few workers in
+%the second phase can significantly improve the performance. In the third
+%experiment, we showed that the distributed version of Alloy can produce
+%similar performance on significantly larger datasets.  
+%
+%In the final experiment, we showed that Alloy can support datasets beyound
+%information seeking, by evaluating against datasets extracted from Wikipedia
+%and a research conference. Results show that the proposed method is able to
+%organize expert documents evaluated based on conference sessions, but not as
+%good on Wikipedia editor discussions.
+
+
+% (limitations)
+% we may want to discuss limitations such as how would we scale to very large
+% bodies of text or larger documents than snippets, also supporting multiple
+% classification and hierarchy.
+
+%\subsection{Limitations and Future Work}
+
+One potential concern might be whether Alloy's tasks take too long to be considered microtasks. 
+While Alloy deploys HITs that take more than a few
+seconds to finish, we think they are still comparable to other complex microtask systems
+such as Soylent \cite{bernstein2010soylent} and CrowdForge \cite{kittur2011crowdforge}.
+Specifically, based on a total of 281 HITs, the median run-time
+for the Head Cast HITs is 7.5 minutes (M=8,3, SD=4.1), for
+Merge Cast 8.3 minutes (M=16.2, SD=15.6), and for Tail Cast
+11.4 minutes (M=13.2, SD=6.1). 
+Despite having less workers
+doing longer tasks, Alloy performed consistently
+across different sets of workers on the same datasets.
+
+
+During development, some assumptions, both explicitly
+and implicitly, were made about the input of the system:
+1) there are more clips than categories.
+2) the categories follow a long-tailed distribution.
+3) clips belong to primarily one cluster.
+4) there is a small set of gold-standard clusters.
+5) workers can understand the content enough to cluster it.
+Note that we do not assume the crowdworkers can understand the semantics of the
+content, but just enough to identify ideas that are salient and common in the
+dataset.
+Thus they may be able to cluster complex topics such as machine learning without
+understanding those topics if enough relational context is embedded in the clips.
+For example, an abstract of a research paper may say ``this paper uses POMDP
+machine learning
+approaches to cluster text'', they might put it in a ``clustering''
+cluster without
+knowing what a POMDP is.
+
+% \begin{enumerate}
+%     \setlength\itemsep{0.1em}
+% 
+%     \item there are many more clips than categories.
+%     \item the categories follow a long-tailed distribution.
+%     \item clips belong to primarily one cluster.
+%     \item there is a small set of gold-standard clusters.
+%     \item workers can understand the content enough to cluster it.
+% \end{enumerate}
+
+One obvious limitation to our approach is clustering long documents.
+This is a common limitation for crowd-based systems that rely
+on workers reviewing multiple items for context
+(either from random selection or active sampling). It becomes infeasible to fit multiple
+items in a single HIT if the length of each item is long.
+Another related limitation is organizing documents that describe multiple topics. 
+Lab studies in a past work \cite{kittur2013costs}
+showed that individuals are able to decompose long
+documents into short clips of single topics during information seeking tasks. 
+One way to expand the
+proposed method to overcome the length limitation could be splitting documents into short
+snippets, either with the crowds or machine algorithms,
+and create topical clusters using Alloy.
+
+% We can more formally characterize the scaling function on the number of categories shown in the Merge
+% Cast as $T = log_c~N$, where $c$ represents the sparseness parameter of a dataset, $N$ the number of items 
+% in the dataset, and $T$ the number of categories shown in the Merge Cast. The upper-bound limitation of 
+% Alloy is then $T < L$, where $L$ is a limit on the complexity of a task given the characteristics of the 
+% human computation platform utilized. Intuitively, this means that the Merge Cast will scale better 
+% when the dataset involves fewer categories that explain more of the data, and when the human computation 
+% platform supports more complex tasks.
+
+% If we formulate the sparseness parameter $c$
+% of a dataset base on the number of items $N$
+% and the number of categories $T$ as $T = log_c ~ N$, the limitation of the distributed Merge Cast is 
+% then $\ell \ge T$, where $\ell$ is the cognition limit of number
+% of categories that can be presented in a single post to the given crowdsourcing marketplace.
+
+Another limitation is organizing datasets that are inherently difficult to structure categorically. For example, 
+concepts in Q3 (\emph{planetary habitability}) have causal relationships without
+clear categorical boundaries (e.g., \emph{distance to sun}, \emph{temperature} and \emph{liquid water}).
+As a result, all approaches had significant trouble,
+including low agreement between human annotators. 
+On the other hand, some dataset can be organized categorically in multiple ways.
+In Q4 (\emph{Barcelona}) we found that some categories fit a \emph{place}
+schema (e.g., \emph{Sitges}, \emph{Girona}) while other categories fit a \emph{type}
+schema (e.g., \emph{museums}, \emph{beaches}).
+One approach for addressing this could be trying to cluster workers to separate the different kinds of schemas; however, upon inspection we found that individual
+workers often gave mixtures of schemas. This interesting finding prompts further research to investigate what cognitive and design features may be causing this, and how to learn multiple schemas. 
+%One possible explanation is that a single schema often only covers part of the dataset,
+%and we require the workers to organize all given items. For example, the $tool$ schema
+%covers majority of the items in Q1 (bathtub drain), but does not cover items that
+%explains how
+%drains works, safety precautions, or steps to remove drain covers. 
+%Another assumption is that information on the original sources are organize in different %ways, 
+%and may influence the workers to use multiple schemes. 
+%One possible improvement is to explicitly assign schemes to different workers, 
+%and allow them to only cluster items that fits the given scheme. 
+%A more interesting direction may be discovering a set of good schema using the crowd. 
+
+
+% By examining the data, we found two reasons.  First,
+% there is a lot of uncertainty in the topic, because not even the science
+% community has a clear idea of the answer; for example, some clips even discussed whether
+% the definition of life should be exclusively carbon based. Second, there are a
+% lot of interconnected and correlated factors. For example, the \emph{distance
+% 	to its star} determines whether a planet is in the \emph{habitable zone} of
+% a solar system, which effects the \emph{temperature} of the planet and whether
+% it potentially contains \emph{liquid water}. 
+
+
+Looking forward, we identified a set of patterns that may be useful to system designers
+aiming to merge human and machine computation to solve problems that involve rich
+and complex sensemaking.
+%  Our two-phase clustering approach breaks up human involvement
+%  such that early workers can focus on building up context and finding common and
+%  salient patterns in the data which are useful for training machine learning
+%  classifiers, while later stage workers can leverage this previously
+%  generated context (in the form of already created categories) to focus on the
+%  edge cases and one-offs.
+The hierarchical clustering backbone we use to integrate judgments from a
+variety of crowdworker tasks allows us to \textit{cast} for different types of
+crowd judgments and \textit{gather} them into a coherent structure that
+iteratively gets better with more judgments.  We also introduce useful new
+patterns for improving global context through self-selected \emph{sampling} and
+keyword \emph{searching}.  One important consideration these patterns bring up
+is that while previous ML-based approaches to crowd clustering have focused on
+minimizing the number of judgments, we have found it is at least as important
+to support the rich context necessary for doing the task well and setting up
+conditions that are conducive for crowdworkers to induce meaningful structure
+from the data.
+
+
+We hope the patterns described in this chapter can help researchers
+develop systems that make better use of human computation in different domains and for different purposes. For example,
+the \emph{sample and search} pattern could potentially be adapted to support other tasks such as image
+clustering, where crowdworkers could use the sampling mechanism to
+get a sense of the variety of images in the dataset, highlight discriminative objects, and label images queried based on features extracted from the highlighted regions. Furthermore, the \emph{cast and gather} 
+pattern may provide a useful framework for combining
+crowds and computation that is both descriptive and generative. For example, Zensors \cite{laput2015zensors}, a crowd-based real-time video event detector, could be considered a form of the cast and gather pattern which uses a classification algorithm instead of a clustering algorithm as a backbone, and casts for human judgements whenever its accuracy falls below a threshold (e.g., if an environmental change lowers precision), with the classifier backbone retrained with the new human labels. While we used a clustering backbone in this work, 
+future system designers might consider other machine learning backbones (e.g., classification or regression algorithms) for different tasks. Overall, we believe this approach takes a step towards solving complex cognitive tasks by enabling better global context for crowd workers and providing a flexible but structured framework for combining crowds and computation.
+
+
+% Many other future research directions present themselves. For example, we can
+% improve quality by using the crowd to fuse similar dimensions together by highlighting
+% synonymous words to improve quality. On the other hand, we can push the boundary of crowd-clustering methods by testing Alloy on typical machine learning datasets that have significantly more items. 
+% Other computational techniques could be used to optimize Alloy to require
+% less human labor. For example, techniques in \cite{bragg2013crowdsourcing}
+% can potentially be adapted to dynamically determine when to stop hiring more
+% crowdworkers in each Cast. Alternatively, 
+% the random sampling mechanism in the Head Cast could be replaced by
+% active learning techniques; for example, presenting the most uncertain
+% clips to crowdworkers for precision, or clips with fewer annotations or
+% those that do not contain previously highlighted keywords for coverage. 
+
+% Finally, we hope that Alloy can motivate new research that focuses on
+% combining computation and crowdsourcing to tackle problems that are
+% difficult for individual or machine algorithms,
+% and the proposed design patterns can be helpful for
+% other researcher when building future crowd-based information systems.
+
+
+% On the other hand, scalling of number of snippets can be achieved through
+% crowdworkers working on a smaller set of random clips, as shown in Phase B.
+% There is no apparent way to scale the system to cover datasets that are both
+% huge in number of clips and number of categories in Phase B. Since it could be
+% difficult to cover all categories as each crowdworker can only process a small
+% number of clips.
+
+% \jeffrz{One final sentence here to end on a high note and get people excited again}
+

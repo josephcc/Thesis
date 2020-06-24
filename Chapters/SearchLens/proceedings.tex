@@ -1,0 +1,639 @@
+\documentclass{sigchi}
+
+% Use this section to set the ACM copyright statement (e.g. for
+% preprints).  Consult the conference website for the camera-ready
+% copyright statement.
+
+% Copyright
+\CopyrightYear{2016}
+%\setcopyright{acmcopyright}
+\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+% DOI
+\doi{http://dx.doi.org/10.475/123_4}
+% ISBN
+\isbn{123-4567-24-567/08/06}
+%Conference
+\conferenceinfo{CHI'16,}{May 07--12, 2016, San Jose, CA, USA}
+%Price
+\acmPrice{\$15.00}
+
+% Use this command to override the default ACM copyright statement
+% (e.g. for preprints).  Consult the conference website for the
+% camera-ready copyright statement.
+
+%% HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP --
+%% Please note you need to make sure the copy for your specific
+%% license is used here!
+% \toappear{
+% Permission to make digital or hard copies of all or part of this work
+% for personal or classroom use is granted without fee provided that
+% copies are not made or distributed for profit or commercial advantage
+% and that copies bear this notice and the full citation on the first
+% page. Copyrights for components of this work owned by others than ACM
+% must be honored. Abstracting with credit is permitted. To copy
+% otherwise, or republish, to post on servers or to redistribute to
+% lists, requires prior specific permission and/or a fee. Request
+% permissions from \href{mailto:Permissions@acm.org}{Permissions@acm.org}. \\
+% \emph{CHI '16},  May 07--12, 2016, San Jose, CA, USA \\
+% ACM xxx-x-xxxx-xxxx-x/xx/xx\ldots \$15.00 \\
+% DOI: \url{http://dx.doi.org/xx.xxxx/xxxxxxx.xxxxxxx}
+% }
+
+% Arabic page numbers for submission.  Remove this line to eliminate
+% page numbers for the camera ready copy
+% \pagenumbering{arabic}
+
+% Load basic packages
+\usepackage{balance}       % to better equalize the last page
+\usepackage{graphics}      % for EPS, load graphicx instead 
+\usepackage[T1]{fontenc}   % for umlauts and other diaeresis
+\usepackage{txfonts}
+\usepackage{mathptmx}
+\usepackage[pdflang={en-US},pdftex]{hyperref}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{textcomp}
+
+\usepackage{arydshln}
+
+% Some optional stuff you might like/need.
+\usepackage{microtype}        % Improved Tracking and Kerning
+% \usepackage[all]{hypcap}    % Fixes bug in hyperref caption linking
+\usepackage{ccicons}          % Cite your images correctly!
+% \usepackage[utf8]{inputenc} % for a UTF8 editor only
+
+% If you want to use todo notes, marginpars etc. during creation of
+% your draft document, you have to enable the "chi_draft" option for
+% the document class. To do this, change the very first line to:
+% "\documentclass[chi_draft]{sigchi}". You can then place todo notes
+% by using the "\todo{...}"  command. Make sure to disable the draft
+% option again before submitting your final document.
+\usepackage{todonotes}
+
+\usepackage{amsmath}
+
+\usepackage[threshold=1]{csquotes}
+
+\newcommand{\adam}[1]{{\textcolor{red}{Adam: #1}}}
+\newcommand{\niki}[1]{{\textcolor{red}{Niki: #1}}}
+\newcommand{\joe}[1]{{\textcolor{red}{Joe: #1}}}
+
+% Paper metadata (use plain text, for PDF inclusion and later
+% re-using, if desired).  Use \emtpyauthor when submitting for review
+% so you remain anonymous.
+\def\plaintitle{SIGCHI Conference Proceedings Format}
+\def\plainauthor{First Author, Second Author, Third Author,
+  Fourth Author, Fifth Author, Sixth Author}
+\def\emptyauthor{}
+\def\plainkeywords{Exploratory Search Interfaces; Sensemaking; Visualization}
+\def\plaingeneralterms{Documentation, Standardization}
+
+% llt: Define a global style for URLs, rather that the default one
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{
+    \def\UrlFont{\sf}
+  }{
+    \def\UrlFont{\small\bf\ttfamily}
+  }}
+\makeatother
+\urlstyle{leo}
+
+% To make various LaTeX processors do the right thing with page size.
+\def\pprw{8.5in}
+\def\pprh{11in}
+\special{papersize=\pprw,\pprh}
+\setlength{\paperwidth}{\pprw}
+\setlength{\paperheight}{\pprh}
+\setlength{\pdfpagewidth}{\pprw}
+\setlength{\pdfpageheight}{\pprh}
+
+% Make sure hyperref comes last of your loaded packages, to give it a
+% fighting chance of not being over-written, since its job is to
+% redefine many LaTeX commands.
+\definecolor{linkColor}{RGB}{6,125,233}
+\hypersetup{%
+  pdftitle={\plaintitle},
+% Use \plainauthor for final version.
+%  pdfauthor={\plainauthor},
+  pdfauthor={\emptyauthor},
+  pdfkeywords={\plainkeywords},
+  pdfdisplaydoctitle=true, % For Accessibility
+  bookmarksnumbered,
+  pdfstartview={FitH},
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=linkColor,
+  breaklinks=true,
+  hypertexnames=false
+}
+
+% create a shortcut to typeset table headings
+% \newcommand\tabhead[1]{\small\textbf{#1}}
+
+% End of preamble. Here it comes the document.
+\begin{document}
+
+\title{SearchLens: Composing and Capturing\\Complex User Interests for Exploratory Search}
+
+\numberofauthors{3}
+\author{%
+  \alignauthor{Leave Authors Anonymous\\
+    \affaddr{for Submission}\\
+    \affaddr{City, Country}\\
+    \email{e-mail address}}\\
+  \alignauthor{Leave Authors Anonymous\\
+    \affaddr{for Submission}\\
+    \affaddr{City, Country}\\
+    \email{e-mail address}}\\
+  \alignauthor{Leave Authors Anonymous\\
+    \affaddr{for Submission}\\
+    \affaddr{City, Country}\\
+    \email{e-mail address}}\\
+}
+
+\maketitle
+
+\begin{abstract}
+
+Whether figuring out where to eat in an unfamiliar city or deciding which apartment to live in, consumer generated data (i.e. reviews and forum posts) are often an important influence in online decision making. To make sense of these rich repositories of diverse opinions, searchers need to sift through a large number of reviews to characterize each item based on aspects that they care about. We introduce a novel system, SearchLens, where searchers build up a collection of ``Lenses'' that reflect their different latent interests, and compose the Lenses to find relevant items across different contexts. Based on the Lenses, SearchLens generates personalized interfaces with visual explanations that promotes transparency and enables deeper exploration. While prior work  found searchers may not wish to put in effort specifying their goals without immediate and sufficient benefits, results from a controlled lab study suggest that our approach incentivized participants to express their interests more richly than in a baseline condition, and a field study showed that participants found benefits in SearchLens while conducting their own tasks.
+
+%, and used their Lenses to explore and comprehend each item instead of sifting through lists of reviews in a restaurant search task.
+
+
+% Participants in our lab and field studies also found other benefits including being able to reuse and compose Lenses across contexts, and working at multiple levels of specificity and hierarchy. 
+
+%in a way that matches how their interests are instantiated in the data. SearchLens goes beyond previous approaches such as faceted browsing, user intent models, and personalized search by introducing the idea that each lens can match part of a users' latent interests and concepts, and that these Lenses can be composed together to match a user's particular context (e.g., searching for restaurants with outdoor spaces and that serve alcohol and aren't too crowded). 
+
+%Across a lab and field study we find that users find benefits in the SearchLens approach, including being able to transfer and reuse Lenses across contexts, find and capture ``honest signals'' of their concepts in the data, transparency and explainability, and working at multiple levels of specificity and hierarchy. 
+
+%In addition, we show that standard information retrieval systems (i.e., document search engines) can be easily adapted to support these interactions with high efficiency and scale. 
+ 
+
+%The primary mechanisms of traditional search interfaces is outside-in: users typically start with general queries and iteratively refine their search terms to a specific goal using a simple query box, or, alternatively, browse through categories or facets based on global characteristics. However, the results returned are largely opaque: it is difficult to understand why they match a user's preferences, and further exploration is also difficult. We instead explore an inside-out approach in which the user progressively build up a query structure, or Lenses, that reflects their idiosyncratic, evolving mental models. The system in turn uses the same Lenses to shape an interactive interface for the search results, enabling personalized interpretation of the data as well as providing mechanisms for deeper exploration. Lab and field studies show that our prototype system, SearchLens, allows participants to fluidly capture, build up, and refine Lenses that reflect their interests and goals. The Lenses can be reused over time and transferred across contexts, enabling an interactive personalized interface that allows users to effectively interpret, explore, and find desired results. In addition, we show that standard information retrieval systems (i.e., document search engines) can be easily adapted to support these interactions with high efficiency and scale. 
+
+
+\end{abstract}
+
+\category{H.5.m.}{Information Interfaces and Presentation
+  (e.g. HCI)}{Miscellaneous} \category{See
+  \url{http://acm.org/about/class/1998/} for the full list of ACM
+  classifiers. This section is required.}{}{}
+
+\keywords{\plainkeywords}
+
+
+\begin{figure*}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/main_annotated.png}
+    \caption{An overview of the SearchLens system. The Query Panel on the left allows users to specify search topics, or Lenses, with keywords of visualized by colored cells sized by importance. Lenses can be freely disabled or enabled for different scenarios. The Results Panel on the right shows a ranked list of search results that best match the enabled Lenses from the searcher. The same visualization for specifying query now are used for explaining how each result matches with users interests and mental model, and also serve as an interactive navigation for filtering mentions of specific keywords. The Overview Panel at the bottom shows a collapsed version of the cells that allows for quick comparison between restaurants.}
+    \label{fig:flow}
+\end{figure*}
+
+\section{Introduction}
+
+Whether figuring out where to eat in an unfamiliar city or deciding which apartment to live in, people often rely on reading online reviews and forum posts to make predictions about how well different options might match their personal interests and needs.  With the proliferation of online reviews, people now have instant access to millions of online reviews from people with varying perspectives and interests. It was estimated that in 2013 Amazon provided shoppers access to more than one million reviews for just their electronics section \cite{mcauley2013hidden}, and in 2016 Yelp provided around 250,000 reviews for over 6,000 restaurants for the city of Toronto alone \cite{yelpdata}. Having access to this rich repository of diverse perspectives based on the past experiences of others has the potential to empower consumers to understand their choices thoroughly and make better decisions for themselves without being overly influenced by marketing and branding \cite{de2015navigating}.
+
+%However, the diversity of the reviews also often makes aggregated information, such as average review ratings, not enough for people to make decisions, and finding relevant reviews and reading through to understand the decision space can be challenging and time-consuming because people must both discover important factors that might be relevant to them (e.g., long lines, dishes or ingredients that signal the authenticity of food) as well as evaluate how various options address those factors. Furthermore, once they have finished searching the work they did in discovering factors and evaluating options does not persist, resulting in them having to start from scratch even for a very similar need. For example, a traveler who has spent a lot of time choosing between ramen restaurants in Los Angeles must start from scratch evaluating ramen restaurants in Toronto, despite having discovered several important factors (e.g., thickness and chewiness of noodle, whether the broth is simmered for a long time with pork bones) that will be similarly utilized in their decision making.
+
+% I added this back for people who might say why not just look at the scores
+Unfortunately, it is often difficult for users to make sense of content such as reviews to determine their relevance to their goals. One problem is that star ratings are often not sufficient, and recent research has shown reviews often play an important role in users online purchase decisions \cite{mudambi2010research,gan2012helpfulness}. For example, restaurants might receive negative reviews for its simple decor and lack of good ambiance, but some searchers might value more the authenticity of the food or whether vegan options were available on the menu. Subsequently, finding, reading, and evaluating relevant reviews is time-consuming and challenging. Users have to manually parse through the reviews for each restaurant and match them to their personal interests (e.g., kid friendly, authentic Indian cuisine). They then have to track which restaurant meets which criteria, and if they discover and added any additional criteria, they must back-fill that information and re-evaluate previously seen restaurants. Furthermore, once a user has finished searching, the work the performed discovering and evaluating factors is lost, resulting in having to start from scratch even if a similar need arises in the future. For example, a traveler who has spent a lot of time choosing between ramen restaurants in Los Angeles must start from scratch evaluating ramen restaurants in Toronto, despite having discovered several important factors (e.g., thickness and chewiness of noodle, whether the broth is simmered for a long time with pork bones) that will be similarly utilized in their decision making.
+
+Getting users to specify these nuanced interests and preferences has been a long standing challenge. Several decades of research have explored ways of getting users to externalize their interests \cite{jansen2000real,belkin2001rutgers}, for example, by using prompt and text field designs that promote longer query terms \cite{franzen2000verbosity,belkin2003query},  by asking for relevance feedback on the results provided \cite{salton1990improving,rui1998relevance,peltonen2017negative}, or by explicitly asking users to build up sets of query terms of different topics \cite{hearst1996visualizing,hoeber2006comparative}. There are two primary challenges brought up by this work. First, users have trouble specifying their interests, which includes challenges with identifying query terms that were neither too general nor too specific; providing more than a few terms (even when longer queries were more likely to lead to useful results); and learning terms from the content, rather than knowing them all beforehand  \cite{belkin2003query,salton1990improving}. The other main challenge found by the above approaches is that it is very challenging to get users to put in the work to externalize their interests, either as query terms or as explicit feedback, due to perceptions that the work will not be sufficiently paid off in the future or not understanding how their work will affect their results. 
+%% This is unnecessary and very repetitive with the previous paragraph
+These externalized representations, or ``Lenses'' are leveraged as an explanatory tool, providing users with a way to quickly parse, understand and make judgments based on the vast amount of review data instantaneously. Additionally, Lenses can be reused in different contexts and combined in different configurations. In the example above, imagine a system which could capture the factors that the traveler found important for ramen in Los Angeles and reuse them to quickly make a confident, personalized decision about ramen in Toronto. If traveling to Toronto with kids, a ``kids'' Lens might also be added with factors such as whether the restaurant typically has long lines and how many seats it has. Such persistent ``Lenses'' could be useful in a variety of situations beyond reviews, ranging from academics keeping track of interesting research topics; travelers deciding which places to visit in an unfamiliar city; consumers deciding between products; lawyers doing case discovery; or voters tracking important issues.
+We explore this system in the context of restaurant reviews, conducting a controlled lab study to examine our visual interface for explanation and exploration is effective in providing immediate benefits to elicit rich interest expressions from the users, and a field deployment study to explore the benefits of Lenses when users were conducting their own tasks. 
+
+%% See Comment
+%To understand the prevalence of these issues, we conducted a pilot survey with 50 participants recruited from Amazon Mechanical Turk (age between 21 and 63, M=37.0, SD=11.7, 52\% male, and 48\% female, mostly from the US), focusing on their experiences when researching restaurants online. We chose restaurant search as our main topic due to its subjective nature and the availability of large repositories of reviews with diverse opinions and preferences. Most of our participants (95\%) self-reported that they use services that provide reviews and ratings to look for restaurant information online. At the same time, 60\% of the participants agreed that do not always choose restaurants based on their average ratings. Participants also agreed that when searching for restaurants online, they had encountered restaurants with bad average ratings but were mostly about things that they did not care about (62\%), and that it is time consuming to sift through reviews to find ones that were of interest to them (60\%). This suggests that searchers often spend a lot of time and effort to carefully examine the reviews and identify relevant aspects and keywords that reflect their personal preferences and repeat this process across different scenarios.
+
+
+
+% MERGED INTO (2) -- ; and 3) users do not understand how their interactions will affect their content. 
+% i feel like (2) and (3) is potentially saying how the interaction of querying is agent-based since the relationship between input and output is unclear and can be unexpected, and we are making it towards direct manipulation by adding transparency 
+
+%Supporting personalized explanation of items in a search results is challenging first because the interests and goals of an individual are often not fully specified in the query, and then were often further compressed by computational representations that can be difficult for humans to understand \cite{chuang2012interpretation}. 
+%Consider for example an user interested in authentic Indian food -- this may be true at a high level, but perhaps that person also has a preference towards Northern Indian cuisine, and has particular specific favorites, such as \textit{pani puri} or \textit{samosas}. Or perhaps users are trying to look for \textit{outdoor restaurants} in a \textit{easy-to-park neighborhood} that have \textit{space for kids} to run around but also serve \textit{hoppy beers} and \textit{rye whiskey}. If these nuanced interests and soft criteria, while often key factors in decision making, are  not specified in the query terms, search systems would have little understanding of their users to generate personalized explanation for each result, leaving users to rely on closely examining many reviews to identify ones that were relevant to their latent interests in order to comprehend options in the search results.
+
+
+
+% Results suggest that our prototype system SearchLens can:
+
+% \begin{itemize}
+% \item allow users to fluidly capture, compose, and reuse Lenses to reflect their interests and needs for different contexts
+% \item allow users to interpret, explore, and discover desired results using personalized interactive interfaces instead of sifting through reviews in arbitrary order
+% \item encourage users to express and refine their Lenses using significantly more keywords when compared to a baseline condition that does not support personalized explanation and exploration interfaces
+% \end{itemize}
+
+%However, the sheer amount of online reviews are often well beyond individuals capacity to process, prohibiting them to benefit fully from the these rich repositories of diverse information.
+%While review services typically provide users with average rating score and rating distribution for each option, they provide little personalized insights into how each option matches with the interests of a particular user.  Supporting personalized explanation of items in a search results is challenging first because the interests and goals of an individual are often not fully specified in the query, and then were often further compressed by computational representations that can be difficult for humans to understand \cite{chuang2012interpretation}. Consider for example an user interested in authentic Indian food -- this may be true at a high level, but perhaps that person also has a preference towards Northern Indian cuisine, and has particular specific favorites, such as \textit{pani puri} or \textit{samosas}. Or perhaps users are trying to look for \textit{outdoor restaurants} in a \textit{easy-to-park neighborhood} that have \textit{space for kids} to run around but also serve \textit{hoppy beers} and \textit{rye bourbon}. Past work have shown that even expert searchers typically do not use more than a few query terms to specify their information needs, even when longer queries tend to lead to better results or higher user satisfaction in exploratory search scenarios \cite{belkin2003query}. As a result, these nuance interests and soft criteria, while often key factors in decision making, are rarely specified in a single query. This leaves search systems with little understanding of their users to generate personalized explanation for each result, leaving users to rely on closely examining many reviews to identify ones that were relevant to their latent interests in order to comprehend options in the search results.
+
+% To understand the prevalence of this issue, we conducted a pilot survey with 50 participants recruited from Amazon Mechanical Turk (age between 21 and 63, M=37.0, SD=11.7, 52\% male, and 48\% female, mostly from the US), focusing on their experiences when researching restaurants online. We chose restaurant search as our main topic due to its subjective natural and the availability of large repositories of reviews with diverse opinions and preferences. Most of our participants (95\%) self-reported that they use services that provide reviews and ratings to look for restaurant information online. At the same time, 60\% of the participants agreed that restaurants they like do not always have high average ratings. Participants also agreed that when searching for restaurants online, they had encountered restaurants with bad average ratings but were mostly about things that they did not care about (62\%), and that it is time consuming to sift through reviews to find ones that were of interest to them (60\%). This suggests that even though modern search engines can return a list of options and reviews in split seconds, searchers often still need to spend a lot of time and effort carefully examining each result to find parts that are relevant to them before they can start comparing their options and make decisions.
+% For example, looking for reviews that describe a particular drink, or whether the environment was kid friendly.
+
+%An alternative approach is to annotation each item in the dataset of with different criteria, subtopics, and attributes, whether using expert labelers or computational techniques \cite{}, and present these metadata to the users using faceted search interfaces \cite{hearst2006design}.
+%While expert annotation have found to be useful for providing an overview of a large number of choices (e.g., products, restaurants), allowing users filter and navigate to different options based on objective criteria (e.g., price range, location), it is unlikely for it to scale and support the above mentioned subjective interests and needs (e.g., good date night restaurants). For this, prior work has also explore ways to extract aspects and subjective judgments from the reviews using computational approaches. However, 
+
+%In summary, we suggest to design exploratory search interfaces that can provide personalized explanations and exploration interfaces for each search result, and encourage users to express their rich latent interests in order to enable these benefits. In addition, many preferences (such as \textit{hoppy beers} and \textit{rye bourbon}) might be relevant for multiple contexts, such as on a date night or going out for drinks with friends in different neighborhoods, and allowing users to structure and persist keywords that describe their different interests can further reduce future efforts. This also has the benefit of encouraging users to refine their query terms to be used again in the future, since some of the terms that might seem to be good at first might in fact not be very discriminatory (e.g., \textit{great}, \textit{delicious}) versus less obvious terms that act as more ``honest signals'' (e.g., the use of the word \textit{bone broth} for ramen broth that is simmered for days).  
+
+% In this paper we explore a novel interface that allows users to specify and maintain their multifarious and idiosyncratic search goals with structured queries that we call Lenses, and gradually construct an personalized interactive search interface based on their own interests and past activities. With the rich interest profiles specified by the users, the system can provide personalized visual explanation of items in a search results beyond average ]rating scores. The visual explanations also serve as personalized interfaces that allow users to surface reviews that matches their different latent interests for deeper  xploration. The instantiation of this approach is a prototype system called SearchLens, which allows users to progressively and persistently build up a repository of ``Lenses'' that can be used to reflect their latent topics of interests and mental model. Users construct Lenses by specifying keywords and weights, and the system visualizes the importance and frequency of each keyword in the results for comparison. Besides specifying keywords from prior knowledge, SearchLens also provides a mechanism for users to discover and collect keywords as they look at the search results. In addition, the system provides suggested keywords for each Lens using a semantic word vector model. The Lenses that users create persist across sessions, allowing users to freely enable and disable different sets of Lenses for different occasions. For example, enabling their Lenses for ``kids friendly'', ``easy parking'', and ``home cooking'' to explore restaurant options for a big family dinner, and enabling their Lenses for ``cozy and intimate'', ``easy parking'', and ``good wine selection'' to explore restaurant options for date night. These Lenses in turn allow the system to present each result based on the current interests of the users, and allow them to explore each of the results by revealing mentions of different query terms. We conducted a lab study with 29 participants, and a field study with 5 participants conducting their own tasks over 3 days. 
+%In addition, we also show that standard information retrieval systems (i.e., document search engines) can be easily adapted to support these interactions with high efficiency and scale. 
+
+
+% In this paper we explore a novel interface that allows users to specify and maintain their multifarious and idiosyncratic search goals with structured queries that we call Lenses, and gradually construct an interactive search interface based on their own interests and past activities. The instantiation of this approach is a prototype system called SearchLens, which allows users to progressively and persistently build up a repository of ``Lenses'' that can be used to reflect their topics of interests and mental model. Users construct Lenses by specifying keywords and weights, and the system visualizes the importance and frequency of each keyword in the results for comparison. Besides specifying keywords from prior knowledge, SearchLens also provides a mechanism for users to discover and collect keywords as they look at the search results. In addition, the system provides suggested keywords for each Lens using a semantic word vector model. The Lenses that users create persist across sessions, allowing users to freely enable and disable different sets of Lenses for different occasions. For example, enabling their Lenses for ``kids friendly'', ``easy parking'', and ``home cooking'' to explore restaurant options for a big family dinner, and enabling their Lenses for ``cozy and intimate'', ``easy parking'', and ``good wine selection'' to explore restaurant options for date night. These Lenses in turn allow the system to present each result based on the current interests of the users, and allow them to explore each of the results by revealing mentions of different query terms. We conducted a lab study with 29 participants, and a field study with 5 participants conducting their own tasks over 3 days. Results show that our prototype system SearchLens a) allows users to fluidly capture, build, and refine Lenses to reflect their interests and needs, b) allows users to interpret, explore, and discover desired results using the interactive interfaces, and c) that the user-generated interfaces can be reused over time and transfer across contexts. In addition, we also show that standard information retrieval systems (i.e., document search engines) can be easily adapted to support these interactions with high efficiency and scale. 
+
+
+\section{Related Work}
+
+%In this work, we propose to support users to fluidly express and curate their different interests and criteria using ``Lenses'', and allow them to freely compose, and reuse their previously specified interests across different contexts. One key challenge is to provide immediate and sufficient benefits to the users in order to elicit their rich interests. For this, we propose to not only use users' Lenses as a way to retrieve rel event items, but also to provide visual explanations for each item and enable deeper exploration. 
+
+Past research has proposed a variety of approaches to collecting and modeling users' interests and intents through both interface design and computation, as well as ways to utilize user interests to provide benefits. Our work builds on a diversity of literature which have attempted to address different aspects of this problem.
+
+% Unlike simple and objective information seeking scenarios, such as finding the address of a restaurant or checking the weather, in review search scenarios, different searchers typically have varying interests and criteria, but at the same time, the reviews themselves are often also multifarious and subjective in nature and therefore do not always match the interests of every searcher \cite{mar2006exp,de2015navigating,mudambi2010research,gan2012helpfulness}. As a results, a searcher might needs to sift through many reviews to find ones that are relevant, or come up with a set of discriminative keywords for each of his or her different interests or criteria.
+
+% Despite their ubiquity, operations for searching with multiple topics of interest as described above are poorly supported by modern approaches. Search engines have optimized for providing information as quickly as possible \cite{teevan2013slow}, such as knowledge cards in which an answer is surfaced directly on a search results page or visual carousels of possible options that a user can quickly click through \cite{yi2009discovering,bota2016playing}. These approaches excel at finding answers to objective, factual questions, but notably fail to address activities involved in complex, personalized search tasks, such as specifying multiple goals and criteria, explaining search results based on personal interests, and allowing for deeper exploration of different options for comparison \cite{marchionini2006exploratory,white2006supporting,white2009exploratory}.
+
+% As a result, the search result list can become increasingly difficult to interpret as the user adds more keywords to their query, raising questions like how different keywords influenced the ranking, and whether each result matches with their different topics of interests. Further, in order to explore deeper to get a better understanding of their options, users would need to leave the search result list page and visit each result independently and manually extract parts that are relevant to their goals, often with the in-page keyword matching provided by the browser. 
+
+\subsection{Eliciting and Modeling Interests and Intents}
+
+A significant topic of research has been interfaces that can collect, explicitly or implicitly, the personal goals and interests of users as they search for information and modify their viewing of content correspondingly. While there is extensive literature on doing so in the context of personalized search and re-ranking of search results (e.g., \cite{speretta2005personalized,shen2005implicit,burges2005learning,cao2007learning}), we focus here on work that enables more interactivity and transparency of users' interests to support more complex searching.  One such thread lies in the collection of users' interests through keywords or interest vectors into an agent or user interest or intent model. This includes seminal work such as WebMate \cite{chen1998webmate}, which built up an agent composed of sets of TF-IDF \cite{wu2008interpreting} vectors to represent the user's different interests. Similar to WebMate, we aim to build collections of terms that represent the user's interests, but focus on explicit user selection of those sets, and making them explainable and composable. Interestingly, WebMate's ``Trigger Pair Model'' which looked at co-occurrence of words within a sliding window across a set of documents can be seen as a precursor to the word vector model that we use for keyword suggestions.  More recent work in this vein includes user modeling of concepts, such as AdaptiveVIBE \cite{ahn2009adaptive} and Intent Radar \cite{peltonen2017negative}, which include two dimensional visualizations of documents and their relation to the user's inferred interests. Our work builds upon these but aims at increasing the richness of the structure, nuance, and specificity of the user's expression of interests. Specifically, our Lenses, composed of multiple keywords that can capture multiple levels of specificity, can be themselves composed into more complex expressions and reused across different contexts and tasks. We also focus on supporting users in the discovery process of building good terms that are discriminatory and explanatory.
+
+
+%\subsection{Exploratory Search Interfaces}
+
+%A major thread of work that we draw on includes novel personalized search interfaces such as semantic web interfaces \cite{wilson2006mspace}, or computational approaches such as automatic or interactive result clustering \cite{cutting2017scatter}. Several exploratory search interfaces have been developed in order to help searchers orient themselves in the information space, review and explore the different subtopics, and keep track of their overall progress \cite{hearst2009search,marchionini2000agileviews,patterson2001predicting,tretter2013searchpanel,morris2008searchbar}. Two closely related studies include Topic-Relevance Map and Exploration Wall, which explored ways to provide overviews of search results of academic papers using document keywords and entities and easily choose keywords to build up subsequent queries \cite{peltonen2017topic,klouche2015designing}. In SearchLens, instead of proposing subsequent queries to the users, we instead propose potentially useful keywords to be incorporated into users' existing Lenses, and provides visual explanations for each item that are capable of scaling to many query terms. This allows users to query with many query terms instead of switching between different more focused query, while still being able to easily comprehend how each result matches with their different latent interests.
+
+\subsection{Faceted Search Interfaces}
+
+In cases were metadata of each item is available, faceted search is perhaps the most commonly used search interface \cite{hearst2006design}, in which users can filter results by selecting or deselecting categories or ``facets'' (e.g., products on an online shopping site). Although originally designed to help searchers efficiently narrow down on relevant sources and exclude irrelevant sources from their search results, researchers have also found faceted search interfaces to benefit exploratory scenarios, where searchers are less certain about their information needs \cite{hearst2002finding,yee2003faceted}. Although these expert structures can cover many general and objective aspects of the data for navigation or filtering (such as price range and location of restaurants, or authors and publishing year of books), it can be difficult to scale to nuanced and subjective criteria that vary between users. For example, different users may have very different ideas about what makes a good date night restaurants. SearchLens instead use a novel interactive interface that allowed searchers to specify and refine their personal and idiosyncratic search topics in a composable and dynamic way enables personalized visual explanation and deeper exploration of items in the search results. 
+
+
+\subsection{Automatically Identifying Structure}
+
+In cases where metadata is not available, computationally inferring task-specific fine-grained facets (e.g., day trip destinations) remains a challenge \cite{bruce1999workplace,teevan2008challenges}. Researchers have long explored ways to extract structure by clustering search results using machine learning \cite{zamir1999grouper,zeng2004learning,hearst1996reexamining}, lexical and HTML patterns \cite{kong2014extending}, crowdsourcing \cite{ka,alloy,cascade}, or interaction techniques \cite{hearst1996reexamining,hearst1996visualizing,hearst1996visualizing}.  The Scatter/Gather system in particular, allowed users to navigate and explore large collections of documents using an interactive hierarchical clustering paradigm \cite{hearst1996reexamining}.  However, a number of papers \cite{hearst2006clustering,chuang2012interpretation,alloy} point to the fact that automatically techniques can often produce incoherent structures that are difficult to comprehend by users. Further, the automatically generated structures were designed to reflect the characteristics of data for exploration, and does not take into account the interests of the users when trying to infer structures. While they may be effective for exploration and navigation, they typically provide little support for allowing users to externalize idiosyncratic search goals, and do not present data in ways that reflects the interests of the users. In SearchLens, we allowed the users to explicitly express their idiosyncratic search goals using structured queries we call Lenses. The system provided a novel interactive visualization that allowed users to both refine their query structures, and also help them interpret the results based on their interests. As such it also has roots in degree of interest (DOI) functions used in the visualization literature, which drive human attention to areas of the information that have high expected utility for a user's expressed or inferred goals \cite{Furnas:1986:GFV:22627.22342, van2009search}, and suggest a bottom-up and iterative, user-driven process of searching in which the user is continually updating the expected utility function. 
+
+\section{System Design}
+
+%The key motivating concept behind SearchLens was providing users with a way to externalize the complex mental models of their interests in a way that could be useful for themselves in understanding their information space immediately and in the future.  We aimed to make the interface simple and transparent but also powerful enough to express hierarchy and support multiple concepts and levels of specificity.  To do this we introduced the idea of ``Lenses'': reusable collections of weighted keywords that contain ``honest signals'' of a user's interests that can be composed in different configurations to match a user's current needs. The Lenses that are enabled in a particular configuration drive various visualization and explanation elements to help the user understand how the information space meets their needs, and also whether they need to fix or reformulate their Lenses. 
+
+The key motivating concept behind SearchLens was providing users with a way to externalize their complex interest profiles in a way that could be useful for raking, explanation, and transference to different contexts. We aimed to make the interface simple and transparent but also powerful enough to express higher level, abstract concepts and differing levels of specificity.
+To do this, we introduced the idea of ``Lenses'': reusable collections of weighted keywords that contain ``honest signals'' of a user's interests that can be composed in different configurations to match a user's current needs. The Lenses that are enabled in a particular configuration drive various visualization and explanation elements to help the user understand how the information space meets their needs, and also whether they need to fix or reformulate their Lenses. 
+
+A key challenge here is to incentivize users to create rich Lenses by providing sufficient and immediate benefits. For this, SearchLens provides visual explanation of items in the search results based on users' Lenses, which also serves as an interface for deeper exploration. When a new Lens is created or enabled, its visual representation appears on the interface for each item, allowing users to understand how well each item matches with the Lens, and how frequently each keyword is mentioned in its reviews. To further explore each item, users can click on keywords in each Lens to see relevant reviews.
+
+A typical use case is as follows. A user just moved to Pittsburgh and wants to go out to eat ramen. She starts by pulling up a restaurant she knows she likes from Toronto and goes through some of the reviews, noticing that the reviews of her favorite tonkatsu ramen mention interesting signals such as ``bone'' and ``umami'' and adds them to her ramen Lens along with other useful words such as ``tonkatsu'', ``ramen'', ``bowl'', etc. Checking to see that her Lens is bringing up other restaurants that serve ramen she likes in Toronto and adding a few of their terms to her Lens, she switches to Pittsburgh and looks for how her Lens is being used.  She also activates her drinks Lens, which she's built up over the years to incorporate her particular interests in unfiltered sakes as well as hoppy beers. Using the Lenses, she quickly see which ramen restaurants in the results list serve unfiltered sakes and/or hoppy beers. To further explore her different options, she can click on each keyword in her Lenses to filter relevant reviews. For example, ``tonkatsu'' might be often mentioned with ``spicy'' in one restaurant, and ``creamy'' in another, allowing her to further differentiate her options based on aspects that she cares about.
+
+The following subsections describe the designs of the SearchLens system. We will first present our concept of ``Lenses,'' and how users can use SearchLens to fluidly express and refine their different nuance interests, and freely compose their Lenses for different contexts. We will also describe how search Lenses can provide immediate benefits once specified, providing users visual explanation of each item in the search results, and also an interface for deeper exploration.
+
+%As an overview of the system, Figure~\ref{fig:flow} shows an example use case of SearchLens, which addresses the issues in the following way:
+
+%\begin{itemize}
+    
+%    \item \textbf{Query specification} The query panel on the left allowed users to specify structured queries, or Lenses, that reflect their different search goals. A treemap \cite{shneiderman2001ordered} is presented for each search lens that illustrate the set of user-specified keywords (cells) and corresponding importance (sizes of each cell). The overall frequencies of query term in the results (shading of each cell) is also presented to show how the results reflect the expectations of the users. (Figure~\ref{fig:flow}, left)
+    
+%    \item \textbf{User-generated interface} Lenses are persisted between visits to the system. As users perform more searches, they gradually build up a repository of their personal Lenses that reflects their different interests and goals. The users can freely enabled or disabled different sets of Lenses for different or recurring scenarios. (Figure~\ref{fig:flow}, left)
+    
+%    \item \textbf{Explanation} The user-specified Lenses are also used for providing an overview for each search result. The same treemap visualization shows the frequencies of each query terms within each search result to help users interpret each result efficiently using the familiar visualization that they created when specifying their search goals. A collapsed version of the treemaps are shown in the bottom panel for overview and quick comparison. (Figure~\ref{fig:flow}, right and bottom)
+    
+%    \item \textbf{Exploration} The user-specified Lenses are also used for navigation for deeper exploration. User can click on their query terms to see their mentions for each search result in real-time. SearchLens also show frequently co-occurring terms in cases where a lot of mentions exist.  (Figure~\ref{fig:flow}, right. Figure~\ref{fig:compare})
+
+%\end{itemize}
+
+%In the following subsections, we describe in detail the domain and data source we used, the design and implementation of each component, and a scalable backend ranking method that powers the interactions.
+
+%\subsection{Domain and Data Source}
+
+To test our prototype system in a realistic and manageable setting, we focused on the domain of restaurant reviews where personalization and searching with multiple goals is especially important. We used a subset of the dataset from the Yelp challenge \cite{yelpdata}, which, in total, contains information about local business in 11 metropolitan areas across 4 countries which contains 48,485 restaurants and 2,577,298 reviews. This allows us to explore how user-specified Lenses can be composed and reused for different scenarios, as well as for the same scenario across different cities. In addition, we also use the same data to train a Word2Vec model \cite{mikolov2013efficient} for generating Lens-specific query term suggestions.
+
+
+\subsection{Capturing User Interests with Lenses}
+
+Our goal was to develop a way to elicit users' interests which is both highly expressive and immediately beneficial. To explore the natural discovery and collection of users' interests we conducted a preliminary study in which we asked people to read reviews of their favorite restaurants on Yelp and see if they could identify terms that were good indications of their interests. We discovered that people found it intuitive to identify many different terms that matched their interests. Many of these terms were not simply general descriptors (e.g., ``good'', ``tasty'') but instead terms they considered indicative of matching their personal interests (e.g., an authentic ramen restaurant would include terms talking about the thickness of the noodles; a popular restaurant might be less favored if it also had very long lines). Terms also fell into different classes of factors users were interested in (e.g., service vs. food quality vs. parking). Users seemed to focus on finding reviews that mentioned these terms and use them in their decision making.
+
+Based on these initial findings we developed a system for users to easily collect terms from reviews into ``Lenses'' and to use those terms to identify and summarize reviews that mentioned those terms. Similar to \cite{hearst1996visualizing}, we enable users to search with multiple Lenses at the same time. However, our Lenses differ from traditional search queries or faceted metadata in several important ways. 
+
+First, our system encourages the iterative development of Lenses as the user explores. A common activity in online exploratory search involves discovering new and interesting aspects from data. SearchLens aims to make it easy for users to add new Lenses and improve existing ones throughout their searching process. Users can create a new Lens by specifying a set of keywords using the text field in the Query Panel on the left (Figure~\ref{fig:flow}). As users browse the results on the right, they might find some keywords in their Lenses were too general to be useful (e.g., ``tasty broth''), and find discover more indicative keywords either from prior knowledge or from the reviews (e.g., ``rich and thick broth''). In this case, users can refine their Lenses by adding new keywords using three different interactions, each for a different scenario. Firstly, users can click on the plus icon under each Lenses to enter new keywords in a Lens specific text field. Secondly, as users discover more indicative keywords or new topics of interests from the reviews, they can highlight the keywords and use a context menu to add them to an existing Lens. In addition, a list of keyword suggestions are also listed under each Lens based on current keywords (Figure~\ref{fig:suggestion}). Users can hover over each suggestion to see example mentions, and click on the keyword include it. This allows users to assess the usefulness of the suggestions, such as to avoid ambiguous terms. The Lens-specific suggestions were computed based a word semantic model described in the below subsection. To remove a keyword, users can click on its cell and select remove keyword in the context menu.
+
+%, and refining query with more indicative terms. However, traditional search interfaces typically only allow users to specify bag-of-word queries, providing no structures for users to express their different search goals and criteria. Further, one's many interests are likely to be useful across different contexts, but the ephemeral nature of traditional search interfaces typically does not support reusing previously specified interests, and discourages users to spend much effort in fully expressing their multifarious interests and refining their query terms.
+
+%SearchLens support these needs by allowing users to specify sets of keywords and weights that describe different topics of interests we call Lenses, and supports searching with multiple Lenses at the same time (similar to \cite{hearst1996visualizing}). 
+
+Second, the system enables users to structure their Lenses and visually inspect and adjust their ``projections'' onto the data. Lenses are represented visually as boxes subdivided into cells, one for each term the user added. Initially, all keywords in the same Lens have equal importance (as reflected by being the same size), but users can click on each cell to select different importance in a context menu (x1, x2, x4, x10, exclude) to better reflect their personal preferences. The size of the cells will adjust accordingly to reflect the importance of each keyword (excluded keywords are represented using fixed size cells with a unique pattern fill). The shade of each cell shows the overall frequency of each keyword in the top 30 search results (Figure~\ref{fig:flow}, Query Panel). This allows the user to get a sense of how items in the corpus reflect their mental representation of each topic. For example, a large cell with very light shade represents a concept that the users deemed as an important feature of the topic, but was rarely found in the results. Surfacing this information ensures user are aware of how useful each of their keywords are, and can refine their Lenses to include more indicative keywords.
+
+
+
+%SearchLens also allows users to specify the importance of each query term using the treemap visualization to better reflect the users' mental representation of each topic. The size of each cell illustrates the importance of each keyword as specified by the users. To adjust the importance of a keyword, a user can click on it and select a different level of importance in a context menu, and the treemap will resize the cells accordingly. The importance levels (x1, x2, x4, and x10) directly correspond to the keyword and lens weight in the backend ranking function, which will be described in detail in a later subsection. 
+
+As Lenses and terms are collected a user can over time build up a repository that reflects her personal interests. Each Lens can be disabled and re-enabled and are persisted across different visits to the SearchLens interface, with disabled Lenses are listed at the bottom of the Query Panel (Figure~\ref{fig:flow}). Various combinations of Lenses can be activated depending on the goal and context. For example, for a date night a user might enable their personalized Lenses for ``cozy and intimate'', and ``vegan'', or for a weekday lunch activate their Lenses for ``fast casual'', ``vegan'', and ``easy parking''. Although our main thrust in this paper is exploring the viability of this approach, further work will likely be needed to understand as Lenses accumulate how to scale them. For example, in the current prototype all disabled Lenses are shown, but future systems could further contextualize Lenses by inferring the task context (e.g., what type of item someone is searching for). %Alternatively, users can use a single lens to create curated list of recurring criteria. For example, creating a lens for top ramen shops to try with keywords such as \emph{ramen}, \emph{broth}, \emph{savory}, \emph{authentic}, and \emph{tonkotsu}.
+%Although in this case the Lens would become less composable as it includes multiple topics. In our study, we observed different behavior from different participants and under different conditions. We will present detailed results in later sections.
+
+
+%\begin{figure}[]
+%    \centering
+%    \includegraphics[width=1\columnwidth]{figures/explain.png}
+%    \caption{}
+%    \label{fig:explain}
+%\end{figure}
+
+\subsubsection{Keyword Suggestions}
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=1\columnwidth]{figures/suggestions.png}
+    \caption{SearchLens provides keywords suggestions based on currently Lenses. Hovering shows a preview panel with mentions of the suggested keyword, allowing users to better understand the effect of adding the suggested keyword. In this case, SearchLens suggested balcony, terrace, fenced, and other keywords for the ``Outdoor Seating'' Lens. However, further inspection showed that fenced may not be a indicative keyword for the purpose of this Lens.}
+    \label{fig:suggestion}
+\end{figure}
+
+
+While creating a new Lens, listing all keywords from prior knowledge can be mentally taxing and have poor recall. To further reduce the required effort for building expressive Lenses, SearchLens generates Lens-specific keyword suggestions. As an example, when a user created an ``Outdoor Seating'' Lens with only three keywords (``outdoor'', ``patio'', and ``garden''), SearchLens automatically suggested relevant keywords inlcuding ``balcony'', ``courtyard'', and ``terrace'' (Figure~\ref{fig:suggestion}). To do so, we trained a Word2Vec model \cite{mikolov2013efficient} with 300 dimensions using the entire Yelp dataset with 2,577,298 reviews. The trained word semantic model can project words onto a semantically meaningful vector space, which in turn allows for measuring semantic similarity between words. Alternatively, it can also be used to find a set of words that were semantically similar to a given term by searching in the semantic vector space for nearby words. To generate Lens-specific keyword suggestions, we first project all its keywords in a Lens onto the vector space and calculate the average vector to obtain a list of semantically similar terms around the average vector. To further increase the chance of presenting useful and discriminatory search terms, we only used terms that appeared more than 50 times in the corpus, were mentioned in reviews of more than three restaurants, and were mentioned in less than 40\% of all restaurants.
+
+
+\subsection{Interest-driven Explanation}
+
+Persisting user interests using search Lenses can support the long term benefits of reusing and recomposing Lenses across scenarios and search sessions. However, without immediate and perceivable benefits, users typically are not willing to spent extra effort expressing their interests for future tasks. For this, SearchLens uses each user's Lenses to provide visual explanation of each item in the search results. This is based on our approach of allowing users to express their multiple topics of interest separately, which enables SearchLens to distinguish between keywords of different topics and opens the possibility of visualizing each result according to users' interests in easy-to-interpret ways. Explanation is especially important for supporting searching with multiple interests, as it can be difficult for the users to understand which interests and keywords were associated with each result. Consider traditional search interfaces that only offer a short snippet for each result as explanation. These short summaries provide little support for personalized interpretation beyond a few highlighted query terms and their context. Even if users listed keywords of many different topics at once, the linear result list also provides little information about each result beyond their overall relevance ranking.
+
+One obvious approach to explaining items in the search results is to surface mentions and statistical information, such as mention frequencies, at the topic level. For example, \cite{hoeber2006comparative} visualized the overall frequency of different search terms in different topics for each search result, and \cite{hearst1996visualizing} visualized the mention locations of different topics within each document. Visualizing at the topic level allowed these systems to provide mechanisms for specifying many topics and keywords, while at the same time visualized deeper information about each result in a way that matches the mental model of the searchers. However, visualizing at the topic level can be prohibitive for keyword-level operations, such as query reformulation and assigning importance levels to different keywords based on their frequencies.
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=1\columnwidth]{figures/compare2.png}
+    \caption{The visual explanation and exploration feature allows comparison of results at different levels of granularity using a familiar interface used for specifying queries - at the levels of Lenses, keywords, co-occurring terms, and mentions, allowing users to query with multiple Lenses at the same time, while still being able to comprehend how each result matches their different Lenses.}
+    \label{fig:compare}
+\end{figure}
+
+
+% TODO messy -- should be fixed @nhahn thanks! @joseph
+SearchLens supports rich explanation at the topic and keyword level through its user-specified Lenses. Explanation occurs by showing the each Lens visualization from the Query Panel (Figure~\ref{fig:flow}) on each result and adjusting the term shading to correspond to the frequency of the term within that search result (Figure~\ref{fig:compare}). By using identical colors and layouts of each Lenses, and showing result-specific keyword frequencies, users can quickly interpret how each result matches with their different interests at both the topic and at the keyword level using a familiar visualization. As an example, Figure~\ref{fig:compare} shows how a user might examine two restaurants in a search result list using her Lenses for ``Steak'', ``Alcahol'', and ``Outdoor Seating''. At the topic level, both restaurants matched well with her Steak Lens rendered in dark shades that incorporated her stronger preference for ``ribeye'' steak, and also also her other interests such as ``flank'' steaks. She can also see that the first restaurant matched her Outdoor Seating Lens better than the second one. Looking at the same Alcohol Lens at the keyword level, she can easily see that the two restaurants matched differently with her ``Alcahol'' Lens where the first one has many mentions of ``byob'' in the reviews and the second one with many mentions of ``beer'' and ``bar'' instead.
+
+%the she can easily infer that both restaurants have no reviews that mentioned her ``whisky'' keyword, and that the second restaurant also has very few mentions of ``cocktail'' as it is rendered in a light shade.
+
+Finally, to provide a more compact, higher-level, topic-centric overview of all restaurants in the search results , SearchLens collapses the colored cells for each Lens into a single cell similar to \cite{hoeber2006comparative}. The size of each cell to shows the overall frequencies of keywords in different Lenses for each result (Figure~\ref{fig:flow}). This allows users to first get a quick overview of restaurants in the search results, and compare different options at the topic level using the Overview Panel at the bottom.
+
+
+\subsection{Supporting Deeper Exploration of Items}
+ 
+
+In addition to acting as visual explanation for each results, the cells in the visualization also act as a navigation tool for deep exploration at the keyword level. Users can explore mentions of different keywords by clicking on its corresponding cell and the summary will update in real-time to show a list of its mentions. In addition, the Lens also shows the top co-occurring words that were frequently mentioned near the selected keyword as overview and deeper navigation, a strategy found useful in exploratory scenarios by prior work \cite{di2018study,di2016rank,peltonen2017topic}. As an example, Figure~\ref{fig:compare} shows the how the Lenses allowed users to explore and compare options at different levels of granularity. At the highest level, users can use the shading of different cells to see that the \emph{Outdoor Seating} Lens has more mentions in the first restaurant (Figure~\ref{fig:compare}). Searchers can use the shading of individual cells to compare options at the keyword level. For example, the term ``BYOB'' was frequently mentioned in reviews for the first restaurant, but did not show up in reviews for the second restaurant. Finally, clicking on the individual cells allowed users to explore mentions of its corresponding keywords and words that were frequently mentioned together. For example, when exploring mention of the work ``ribeye'' for both restaurants, SearchLens showed that there were many mentions of ``sandwich'' near the word ``ribeye'' for the first restaurant, and many mentions of ``bone marrow'' near ``ribeye'' for the second restaurant (Figure~\ref{fig:compare}).
+
+
+
+\subsection{Indexing and Ranking}
+
+Traditionally, faceted search systems typically combine factors from multiple facets for ranking using disjunctions (factors within facets, such as brands selected by the user on a shopping website) and conjuctions (factors between facets, such as brands and price ranges). In an early iteration of SearchLens, we tested using the Boolean OR operator between keywords within the same Lens, treating keywords within the same Lens as synonyms while ranking. However, users reported this approach lead them to restaurants that poorly reflected their Lenses, as some restaurants may have many mentions of few keywords in a Lens, but very few mentions of other keywords. Fundamentally, unlike faceted search systems, different keywords in the Lenses typically describe a criteria as a whole. For example, an authentic ramen Lens might contained keywords describing creamy bone broth and freshly made noodles. In this case, the different keywords combined represented what the user considered good ramen restaurants, instead of as alternate options in a facet (such as a set of preferred brands). In a later iteration, we switched to Okapi BM25 for ranking that used inverse document frequencies to weight keywords instead of eliciting importance rating from the users. However, users reported unable to construct Lenses that reflect their priorities and unable to construct expressive Lenses that lead to useful results. This lead to the current iteration where we used a modified version of the standard Okapi BM25 ranking function to combine keywords across Lenses \cite{robertson2009probabilistic}, which by default considers both term frequency and document frequency to rank documents similar to TF-IDF ranking function, but also adjust for the length of each documents.
+
+We modify the Okapi BM25 ranking function to account for the importance levels specified by users in the following ways. By default, Okapi BM25 uses the inverse document frequencies to weight each keywords, with the motivation that words appearing in many documents tend to be less important. Since in SearchLens users can specify keyword importance using the interactive visual explanation, we instead weight each keyword according to their user-specified importance level. By default, SearchLens assume each Lens is equally important, and normalizes the weights of keyword $q$ in a Lenses $\ell$ in proportion to the user-specified importance level of all keywords $\acute{q}$ in search Lens $\ell$:
+
+%\vspace{-4mm}
+$$weight(q) = \frac{importance(q)}{
+    \sum_{\acute{q} \in \ell}{importance(\acute{q})}
+}$$
+%\vspace{-4mm}
+
+SearchLens then uses the normalized keyword weights in place of the inverse document frequency term in the Okapi BM25 ranking function, and the score of each document $d$ in the corpus for a set of Lenses $L$ is therefore:
+
+%\vspace{-4mm}
+$$score(d, L) = \sum_{\substack{\ell \in L \\ q \in \ell}}\frac{weight(q) * tf(d, q) * (k+1)} { tf(d, q) + k * (1 - b + b *|d| / avgDL)}$$
+%\vspace{-4mm}
+
+where $\ell$ is the different user-specified Lenses, $q$ is the different keywords in each Lens $\ell$, $tf(d,q)$ is the term frequency of keyword $q$ in document $d$, $|d|$ is length of the document $d$, and the constant $avgDL$ is the average document length in the corpus. We used the default parameters $k=1.2, b=0.75$ for Okapi BM25. Finally, we sum up the score of each Lens weighted by a coordination factor, which is the proportion of keywords in a Lens that has a non-zero document frequency. This modified version of the Okapi BM25 function can be easily translated to SQL queries for standard relational databases, or as a custom ranking function for the popular open sourced document retrieval engine Apache Lucene. This allows the SearchLens interface to be easily implemented using readily available tools that were already optimized for scaling and computational efficiency. Admittedly, more sophisticated ranking approaches may further improve the quality of results, but this simple method allowed us to explore the costs and benefits of providing reusable, re-composable, explanation-centric Lenses to users.
+
+
+\subsection{Implementation Notes}
+
+
+The backend of SearchLens was implemented in Python, using NLTK \cite{bird2004nltk} and gensim \cite{rehurek_lrec} for indexing and word semantic model, respectively. In the indexing phase, text in each review is lowercased, tokenized, and stemmed using the Word Punkt Tokenizer \cite{jurish2013word} and Porter Stemmer \cite{van1980new}. Stop words are filtered out. An inverted index that records the document and the offsets of the mentions of each word stems is computed and stored in a PostgreSQL relational database. The Flask Python framework was used for our HTTP server. We implemented front-end of the SearchLens prototype as a web-based system using Javascript (ES6) and the ReactJS GUI framework, and the interactive visualizations are implemented using the D3.js library. User-specified Lenses were stored on client-side using browser cookies, so that they are persistent for the searchers between multiple visits.
+
+\section{Evaluation}
+
+We evaluated SearchLens in two studies. First, we conducted a usability study in a controlled lab environment. Using predefined tasks, we tested the usefulness and usability of the system, as well as whether the visual explanation and exploration feature provides enough benefit to encourage participants to express their rich and multifarious interests. Second, we conducted a field deployment study where participants use SearchLens for their own tasks. This allowed us to explore the benefits and limitations of our reusable and re-composable Lenses in real-life scenarios.
+
+%We evaluated SearchLens by conducting a lab study with 29 participants, and a field study with 5 participants. The studies aimed at assessing both the usefulness of the interface, and how searchers utilizes the different novel features and query paradigm. For the lab study, participants were given three predefined search tasks and personas, where we observe their strategies and behaviors on building and reusing the Lenses. For the field study, participants conducted their own search tasks outside the lab, so we can test SearchLens in real-life scenarios. During the studies, we logged the user interactions for further analysis. In the following subsections, we will describe the two studies in detail.
+
+
+
+\begin{figure}[]
+    \centering
+    \frame{\includegraphics[width=1.0\columnwidth]{figures/baseline3.png}}
+    \caption{A Baseline system with topic-level visual explanation.}
+    \label{fig:baseline}
+\end{figure}
+
+
+\subsection{Usability Study}
+
+The main goal of the usability study was to verify in a controlled lab environment the usability of the interface and whether the visual explanation and exploration features can provide benefits to encourage users to express their nuanced and multifarious interests. We considered these the preconditions for conducting a field deployment study to test the real-life benefits of reusable and re-composable Lenses. For the usability study, we therefore focused on the following:
+
+\begin{itemize}
+%    \setlength\itemsep{-2pt}
+
+    \item whether the interface encouraged participants to externalize multiple interests and structure them using Lenses
+    \item whether participants found the visual explanation and exploration feature to be useful 
+    \item whether the added benefits of visual explanation and exploration encouraged participants to spend more effort to express, iterate, and refine their Lenses
+\end{itemize}
+
+To test the above, we compared SearchLens to a baseline interface as a between subject condition, where the detailed visual explanation and exploration features were removed by collapsing the colored cells in each Lens and visualizing results only at the topic level (Figure~\ref{fig:baseline}), resulting an interface similar to the TileBars and the HotMap systems \cite{hearst1996visualizing, hoeber2006comparative}. Since searchers can not assign importance levels for each keyword in the baseline interface, we used the standard Okapi BM25 ranking function that weights keywords based on inverted document frequencies \cite{robertson2009probabilistic}. We chose this baseline as a more conservative test of the interactive explanation features than, for example, a comparison to Yelp or other search query-driven site (which are the implicit comparisons for the field study below).
+
+The three scenarios for the usability study are listed below. The first scenario was designed to have both clear criteria (nice decor and good atmosphere and serves beer or wine), and an exploratory aspect (find a specific type of Japanese restaurant based on your own preferences). Scenarios 2 and 3 were designed to explore whether users would be able to reuse their Lenses for different contexts and find value in doing so. Scenario 2 had overlapping criteria to Scenario 1 (serves beer, cocktails, or wine), and Scenario 3 involved performing an identical search to Scenario 1 but in a different city.
+
+\begin{itemize}
+  
+%  \setlength\itemsep{-4pt}
+  
+    \item \textbf{Scenario 1}: Stanley is in Pittsburgh, USA visiting some friends and he is in charge of finding a few good restaurants for the group. They are interested in Japanese restaurants. They're not familiar with Japanese food or the different types of Japanese restaurants, so it is up to you to find Japanese restaurants based on reading the reviews and your personal preferences. The restaurants should have a nice decor and good atmosphere. Some of his friends like to have a few drinks with their meal, so if the place has a bar that serves beer or wine it would also be great. Since its pretty nice out, it would also be nice if the restaurants has outdoor seating or a patio, too.
+    
+    \item \textbf{Scenario 2}: John is looking for good seafood restaurants in Pittsburgh, USA, particularly places that serves fresh oysters and has a bar that serves beer, cocktails or wine. Decor or atmosphere are not important, but big plus if they offer outdoor seating, for example, a patio. Some of his friends are allergic to seafood, so the place must also have non-seafood options, preferably steak.
+    
+    \item \textbf{Scenario 3}: (Same as Scenario 1 but for finding restaurants in Montreal, Canada instead of in Pittsburgh, USA.)
+\end{itemize}
+
+A total 29 participants were recruited from a local participant pool, where 14 participants were randomly assigned the SearchLens interface with three predefined search tasks (N=14, Age=18-61, M=28.1, SD=12.7, 7 male, 6 female, and 1 other/not listed), and 15 participants assigned the baseline interface with the same search tasks (N=15, Age=18-54, M=28.1, SD=10.7, 7 male, 7 female, and 1 other/not listed). Each participant was given 60 minutes to complete the study and was compensated with 10 USD. 
+
+
+
+
+%\begin{figure}[]
+%    \centering
+%    \includegraphics[width=1\columnwidth]{figures/Behavior.png}
+%    \caption{Number of different action participants performed under %different conditions. Participants in Baseline relied on reading full %reviews to understand results, whereas participants SearchLens %frequently used the interactive treemaps to see keyword mentions. %Participants conducting their own tasks in the Field study tend to %refine their Lenses often.}
+%    \label{fig:behavior}
+%\end{figure}
+
+
+
+%\subsubsection{Expressing Interests with Lenses}
+
+
+%As a usability check, we first examine if participants expressed different interests using multiple Lenses instead of simply creating a single lens of multiple interests (analogous to a single search query bar). Figure~\ref{fig:numberOfLenses} and~\ref{fig:counts} show the number of Lenses each participants have saved at the end of the study, and in both conditions participants created multiple Lenses. On average, participants created 7.64 Lenses in the SearchLens condition (N=14, SD=3.65), and 6.54 Lenses in the baseline condition (N=15, SD=2.37). No significant difference was found between conditions based on unpaired T-Test (t(27)=0.94, p=0.36). This was expected since the predefined scenarios had many clearly defined criteria, and participants generally created one lens for each criteria (with multiple terms nested within lenses).
+
+\begin{figure}[]
+    \centering
+    \includegraphics[height=0.6\columnwidth]{figures/LensKeywordsCount3.png}
+    \caption{Number of Lenses and keywords saved by each participants at the end of the study. Participants in both conditions created comparable number of search Lenses, but participants in the SearchLens condition collected significantly more keywords in their Lenses.}
+    \label{fig:numberOfLenses}
+\end{figure}
+
+\input{table}
+
+
+
+\subsubsection{Results for the Usability Study}
+
+One of our key hypotheses was that the immediate visual explanation provided by Lenses would encourage participants to express their interests and continually collect and refine those interests throughout the search process. This hypothesis appears to have been validated by the data. On average, participants in the SearchLens condition saved 20.43 keywords across their Lenses (N=14, SD=7.33), significantly more than participants in the baseline condition who saved 11.15 keywords (N=15, SD=3.58; t(27)=4.12, p<0.001). Importantly, this difference is likely not attributable to different perceptions of the task across conditions, as in both the SearchLens and baseline conditions participants generally created one Lens for each task criteria and combined multiple Lenses for each task (e.g., decor, drinks) and there was no difference between the total number of Lenses created between conditions (SearchLens: 7.6, baseline: 6.5; t(27)=0.92, p=0.36). In other words, the term-based interactive visual affordances supported by SearchLens seemed to encourage people to collect more terms indicative of their interests.
+
+This pattern appeared to hold true throughout the search process for the iterative refinement of Lenses as well (Table~\ref{tab:actions}). On average, participants using SearchLens added keywords to existing Lenses 7.4 times (N=14, SD=6.1) while those in the baseline condition did so 3.7 times (N=15, SD=2.8), which was found to be a significant difference (t(27)=2.12, p<0.05). This suggests that the added benefits from the visual explanation and exploration feature encouraged participants to iteratively refine their Lenses and allowed them to discover useful keywords more often.
+
+We also examined whether participants found the added visual exploration features to be useful, and how the added benefits affected their behavior. By examining the behavior logs, we found participants using SearchLens frequently use the visual exploration feature. On average, each participant clicked on 25.86 (SD=29.19) keywords to filter reviews that mention a specific keyword instead of sifting through reviews to find ones that mentioned it (Figure~\ref{fig:reviews}). In both conditions, participants can also click on the name of a restaurant to see a list of reviews ranked by all active Lenses. While there is suggestive evidence that the filtering of reviews led to less use of the generic review lists, the result was not significant based on the number of participants in the study (M=6.33, 3.07; SD=5.78, 5.92; t(27)=1.50; p=0.15).
+
+% we found participants in the baseline condition list reviews of different restaurant more often than participants using SearchLens on average , but the difference was not significant
+
+
+These results suggest SearchLens allowed participants to maintain a broader search goal with multiple interests, while at the same time explore and compare different options at a finer-grain level interactively instead of sifting through the reviews of each restaurant.
+
+
+%These results suggest that the added benefits of visual explanation encouraged participants to express their rich and nuance interests and also encouraged them to iteratively refine their Lenses throughout the search process.
+
+
+
+
+
+
+% \subsubsection{Visual Explanation and Exploration}
+
+
+%Figure~\ref{fig:counts} shows the number of Lenses and keywords each participants under different conditions collected during the study. In general, participants in either condition generated similar number of Lenses. This is expected since the predefined scenarios had many clearly defined criteria. However, results suggest 
+
+%Figure~\ref{fig:behavior} shows the number of actions participants performed under different conditions. In general, participants in the Baseline condition examined the full review lists of different restaurant more frequently then participants in the SearchLens conditions. On the other hand, participants in the SearchLens condition frequently used of the interactive treemaps to filter out mentions of different keywords, which was not available to the participants in the Baseline condition. This suggests that participants in the Baseline condition relied on listing and reading full reviews in order to understand the search results, whereas participants in the SearchLens condition frequently used the interactive treemaps to see mentions of their different keywords in the reviews directly on the search results page. Participants under the two conditions performed similar number of lens modifying actions. Figure~\ref{fig:lens_behavior} shows the average number of detailed lens modifying actions. More than 70\% of the participants in either condition reused their Lenses across condition (with 11 out of 15 participants for the Baseline condition, and 10 out of 14 participants out of the SearchLens condition). Participants under the SearchLens condition used keywords from prior knowledge by creating Lenses and adding keywords to them, but also found keywords in the reviews and used the suggested keywords. In the Field Study, we examined in more detail on how searchers utilizes different SearchLens features to refine their Lenses.
+
+
+%\begin{figure}[]
+%    \centering
+%    \includegraphics[width=1\columnwidth]{figures/LensBehavior2.png}
+%    \caption{Average number of lens editing actions performed by participants under %different conditions. Notice keyword specific features are not available in the %Baseline condition.} %\adam{Minor: this chart is very hard to read, due to the %similar colors and overlapping text, and redundant key.  If there is time, might be %worth cleaning it up a bit.}}
+%    \label{fig:lens_behavior}
+%\end{figure}
+
+
+
+%We designed the first and the third tasks to have overlapping criteria to see whether participants would reuse their Lenses created for the first task that may have been disabled while  performing the second task. Most participants in both condition re-enabled some of their Lenses that were created previously (baseline: 73.3\%, SearchLens: 71.4\%). Upon closer examination, we found that some participants deleted Lenses that were not relevant to the second task and had to recreate them for the third task, citing that they ``\emph{did not realize these are going to be useful for the third task}''. In the field study section, we further explored the benefits of reusable Lenses in real-world settings where participants conducted their own tasks using SearchLens.
+
+
+% NOTE: What about combining and reusing lenses? We say that is something we wanted to look at in the usability study but I don't see anythign about it yet. Did people combine lenses?  Did they reuse their lenses when they had to do the search in a new city?
+
+
+\begin{figure}[]
+    \centering
+    \includegraphics[height=0.6\columnwidth]{figures/reviews.png}
+    \caption{Participants in the SearchLens condition were less likely to read through unfiltered lists of reviews than the baseline condition, which was accompanied by increased use of the SearchLens-specific ability to filter reviews relevant to different keywords.}
+    \label{fig:reviews}
+\end{figure}
+
+
+
+\subsection{Field Study}
+
+Our field deployment study aimed to test our idea of reusable and re-composable Lenses in real-world settings. Five participants were recruited from the first study based on their self-reported high interests in researching restaurants online and interests in participating in a follow up study (N=5, Age=18, 20, 22, 23, and 25, 4 male, and 1 others/not listed). The participants were given access to the SearchLens system via the internet, and were asked to use the system for at least 60 minutes in total over a three day period. Although they were free to choose from any of the 11 cities in the dataset for this study, all five participants conducted tasks for their current city.
+Afterwards, they return to the lab and were given 45 minutes to finished a survey with primarily free-form questions, and were interviewed for another 15 minutes. Each participant was compensated with 40 USD for finishing the study.
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=1.0\columnwidth]{figures/LensKeywordsCount.png}
+    \caption{Number of Lenses and keywords specified by participants under different conditions. In the lab study with predefined search tasks, participants using SearchLens (blue) created a similar number of Lenses but used more keywords than the baseline condition (green). Participants in the field study (red) conducted their own tasks.}
+    \label{fig:counts}
+\end{figure} 
+
+
+%\subsubsection{Participants and Use Cases}
+
+Participants created more Lenses keywords when conducting their own tasks comparing to participants in the lab study (Figure~\ref{fig:counts}). On average, participants in the field study created 13.40 (SD=3.65) Lenses, significantly more than participants in the lab study that created 7.64 Lense (SD=6.54; t(17)=2.46, p<0.05). They also saved significantly more keywords than participants in the lab study (lab: 20.4, field: 30.0, t(17)=2.50, p<0.05).
+Admittedly, it can be difficult to measure how much time participants actually spent using SearchLens in the field, nevertheless, results suggest that participants were able to accumulate more interests Lenses over a three day period than participants who spent 60 minutes in the lab study.
+
+All five participants conducted multiple tasks during the study. Many explored different types of restaurants that they liked in the city using multiple Lenses, using SearchLens to build \emph{``an overview interface for restaurants in the city that I might like''} (P1, P3, P4, P5). Participants also had more specific goals, including to check if there are vegan restaurants she has not discovered yet (P5), restaurants that serve bubble tea (P2), pizza places that offer Chicago deep dish-styled pizza (P3), and Mexican restaurants that has vegan options on the menu (P2).
+
+%Below is an overview of the tasks conducted by the five participants. The number of Lenses and keywords saved by each participant is shown in Figure~\ref{fig:counts}. In the next subsections, we list common use cases and strategies as reported by the participants in the interviews and post-survey:
+
+
+%\begin{itemize}
+
+%\setlength\itemsep{-2pt}
+%    
+%    \item \textbf{P1} conducted multiple tasks to explore different types of restaurants in the city.
+%    \item \textbf{P2} used SearchLens to find Mexican restaurants with vegan options as well as places that have bubble tea.
+%    \item \textbf{P3} used SearchLens to search for pizza places that offer Chicago deep dish-styled pizza, and as well as to explore the different options in the city.
+%    \item \textbf{P4} was similar to P1.
+%    \item \textbf{P5} was similar to P1, but specifically looked for vegan restaurants she had not yet discovered.
+%\end{itemize}
+
+%Participants P1 through P4 lived in the city for the past 3-4 years, while P5 is new to the city.
+
+%\subsubsection{Behavior Logging}
+
+%We recorded the behavior of our participants while using the SearchLens interface. Figure~\ref{fig:counts} shows the number of Lenses and keywords each participants under different conditions collected during the study, and Figure~\ref{fig:behavior} and~\ref{fig:lens_behavior} shows the number of action participants performed under different conditions.  In general, participants in the Field Study conducting their own tasks generated more Lenses and keywords, and also performed operation on refining their Lenses. However, they were performing different search tasks and spending more time on the system than participants in the Lab Study.
+
+
+
+\subsubsection{Refining Lenses}
+
+While participants reported creating Lenses based primarily on prior knowledge, all five participants also reported refining their Lenses throughout the process. Several cited that the shaded cells of the visual explanation helped them quickly noticed some keywords were too uncommon, and that an important concept of interest was missing from the search results (P1, P2, P5). One also mentioned noticing and removing ambiguous keywords when using the mention filtering features (P4). Participants also learned about new keywords which they added to their Lenses, sometimes replacing existing keywords, from both the suggestions (P1, P2, P3, P5) and from the reviews (P1, P2). Interestingly, the behavioral logs (Table~\ref{tab:actions}) suggest they frequently discovered them from the systems' suggestions, indicating the value of the word2vec approach which we initially were concerned about for being noisy. This also points to potential future work in auto-suggesting Lenses which we intentionally avoided here due to concerns about agency and explainability. 
+
+\subsubsection{Breadth and Depth}
+
+Participants created both general, breadth-oriented Lenses and more specific, depth-oriented Lenses. P4 specifically mentioned that it was useful being able to search for different genre (i.e., American, Mexican, or Indian restaurants) and at the same time pay attention to very specific dishes (i.e., cheese steak sandwich made with chicken), while still being able to see how each result match with different things, citing that ``\emph{more specific things are hard to search for on Yelp.}'' Alternatively, P3 presented an interesting use case for deeper exploration of a specific genre, by first creating an more general Indian Food Lens, and then creating multiple more specific Lenses describing specific dishes from different regions of India, generating an overview of different styles of Indian restaurants in the city. This suggests that some users may want to create higher level groups of Lenses
+
+\subsubsection{Reusing Lenses: Combinations and Task Resumption}
+
+Participants reported their strategies for how they reused their Lenses, which can be broken down into two non-exclusive categories. The first use case we observed was task resumption between multiple search sessions (P1, P3, P4). Participants described having the ability to switch to a different sets of Lenses yet still keep the original Lenses for the future being useful (P3). One participant (P1) searched with a single Lens most of the time, but still cited that being able to re-enable Lenses from past sessions and to continue work on previous tasks and refined restaurants being useful. For the second use case, participants mentioned reusing Lenses in combination with other Lenses (P2, P3, P5). When asked about which of their Lenses were used in combination with different other Lenses, participants reported Lenses that concerned style and environment (\emph{Cute and Quirky} (P5), \emph{Atmosphere and Vibe} (P2, P5), \emph{Friendly Staff} (P3)), price (\emph{Inexpensive} (P2, P3), \emph{Large Portion} (P3)), and some food-related but not for a general genre (\emph{Fresh} (P2), \emph{Fast Casual} (P2), \emph{Vegan Options} (P2, P5), \emph{Strong Beer} (P3)).
+
+\subsection{Overall Usefulness and Other Usecases}
+
+
+Through the lab and the field studies, we found evidence that using user-generated Lenses to provide visual explanation for deeper exploration was beneficial and effective in incentivizing users to externalize their interests using Lenses and iteratively refine their Lenses throughout the search process nearly as twice as frequently when compared to participants in the baseline condition that did not include the visual explanations and exploration feature (Figure~\ref{fig:baseline}).  As a result, participants using SearchLens created richer Lenses with nearly double the number of keywords on average compared to participants in the baseline condition. Participants also frequently used the visual explanation feature to explore the individual items in their search results, each filtered reviews using different keywords in their Lenses 25.9 times on average. To test SearchLens in real-world settings, participants in the field study conducted their own tasks, and provided insights into their strategies in building and refining Lenses, as well as their strategies of composing and reusing Lenses across context and across search sessions over a three day period.
+
+In the interview, participants in the field study also reported that they found SearchLens to be useful for their own tasks.
+Three out of the five participants said that they actually found and saved interesting restaurants during the study, and intent to visit those restaurant in the near future (P1, P3, P4). P1 in particular went to one of the restaurants he discovered using SearchLens and was happy about the visit, and P3 used SearchLens to complete a previous task, saying ``\emph{I wanted to try deep dish pizza for some time since I moved to US. Finally found one near the city. Kudos!}'' All participant expressed that they would be interested in using SearchLens in the future if available, many also cited other scenario that might benefit from SearchLens.
+P2 pointed to scenarios where he needed to ``\emph{find a place for many people that may want different things}'', and mentioned that SearchLens would be useful when her family visits her soon for his graduation.
+
+
+\section{Limitations and Future Work}
+
+One limitation of the current implementation of SearchLens is its lack of ability to filter restaurants using their metadata, such as geographic location. We intentionally did not expose these information to our participants so we can focus our studies on allowing them to build personalized Lenses. However, practical systems would likely combine both paradigms to maximize efficiency, and the interactions between the two paradigms would require further studies.
+
+Another obvious limitation of SearchLens it that it required more user effort upfront in order to receive the benefits provided by the system, such as reuse, explanation, and exploration. On a 7-point Likert scale, most participants from our lab study responded favorably to this trade-off with 64\% agreed or strongly agreed that SearchLens is an improvement to the traditional search interfaces, and another 21\% somewhat agreed with the statement, however, the long-term effect remained to be seen. One way to extend SearchLens is to combine machine learning and information retrieval approaches to reduce the effort of building Lenses, such as building interest profiles automatically, or using collaborative filtering and query expansion for expanding or inferring Lenses automatically \cite{ahn2007open,sarwar2001item,xu1996query}, or word-sense disambiguation techniques for resolving ambiguous keywords \cite{yarowsky1995unsupervised}.
+
+Alternatively, we could also explore ways to allow users to share their Lenses with each other through explicit or implicit collaborations. For example, one participant mentioned ``\emph{It would be nice if I can see what Lenses a local person would use if I'm traveling, because I always try to ask the locals about where I should eat.}'' Allowing access to Lenses created by previous users or expert users could potentially enable expertise transfer and accumulation through continuing refinement of a set of Lenses. For example, locals and past travelers could iteratively curate a set of Lenses that leads to an interactive and explorable list of local specialties for future travelers.
+
+Many other interesting future directions present themselves. A promising direction is to explore deeper the idea of user-generated interest profiles and how they could dynamically influence the different interfaces accessible to the users or interacting with users in more proactive ways.
+Since we asked the field study participants to use SearchLens for their own tasks, most participants searched for restaurants in the city they lived in. Some participants that conducted more targeted search tasks (P2, P3, P5) mentioned that they were already familiar with most of the options in the city that fits their goals, but would still occasionally search online to see if there were new restaurants that match their interests (P2, P5).
+As users continue to use SearchLens, the system will accumulate more understanding of what the users is interested in, and can potentially detect and notify the users of new information that might be of interests with high accuracy \cite{yang2006retroactive}.
+Alternatively, existing users may use their repository of Lenses to explore or curate the restaurants in an unfamiliar city. Participants in the field study also pointed to the potential of Lenses being useful for other types of information and domain, including shopping (P2, P3), trip planning (P2, P5), buying a house (P2), and job hunting (P4). 
+
+
+\section{Conclusion}
+
+In this paper we introduced SearchLens, a novel approach that allows users to specify and maintain their profile of multifarious and idiosyncratic interests. This enabled them to reuse and re-compose their different interests across scenarios, as well as maintaining context across multiple search sessions. To encourage users to put in the up-front efforts of curating Lenses, we explored ways of using Lenses to provide immediate benefits of visual explanation of search results, and allowed for deeper exploration. Across a lab and field study we observed that participants expressed their interests with significantly more query terms, and found benefits in the SearchLens approach, including being able to transfer and reuse their Lenses across contexts, being able to interpret new information that reflects their own personal interests with transparency, and working at multiple levels of specificity and hierarchy.
+More fundamentally, being able to visualize and explore new information in ways that promotes transparency and user-centric can potentially empower users to be more aware of their online information diet. For example, as a way to manipulate their own social media feeds, and being more aware of how posts were selected or hidden. We believe SearchLens represents a first step towards a transparent and user-centered approach to addressing subjective and fragmented nature of information today.
+
+
+
+% BALANCE COLUMNS
+%\balance{}
+%\pagebreak
+
+% REFERENCES FORMAT
+% References must be the same font size as other body text.
+\bibliographystyle{SIGCHI-Reference-Format}
+\bibliography{sample}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

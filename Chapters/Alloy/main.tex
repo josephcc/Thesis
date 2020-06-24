@@ -1,0 +1,98 @@
+
+{\rmfamily
+This work was previously published in ACM SIGCHI 2016 (\cite{alloy} and\cite{ka}) and has been adapted for this document.
+}
+
+
+\input{Chapters/Alloy/abstract.tex}
+
+\section{Introduction}
+\input{Chapters/Alloy/intro.tex}
+
+% \section{Related Work}
+% \input{related.tex}
+
+\section{System Design}
+\input{Chapters/Alloy/method.tex}
+
+% \section{Core Design Patterns}
+% \input{design.tex}
+
+
+\begin{table}
+  \centering
+  \footnotesize
+
+% question, number of sources, number of clips, number of turkers
+  \begin{tabular}{ l r r r r r }
+    \hline
+	Dataset &
+    sources &
+    workers &
+    clips &
+	bad &
+    clusters \\
+    \hline
+	% 102
+	\textbf{Q1}:\emph{How do I unclog my bathtub drain?} & 7 & 16 & 75 & 25\% & 8 \\
+  
+	% 115	
+	\textbf{Q2}:\emph{How do I get my tomato plants to produce more tomatoes?} & 18 & 13 & 100 & 10\% & 8 \\
+ 
+	% 96
+	\textbf{Q3}:\emph{What does a planet need to support life?} & 19 & 19 & 88 & 31\% & 7  \\
+
+	% 116
+	\textbf{Q4}:\emph{What are the best day trips possible from Barcelona, Spain?} & 12 & 12 & 90 & 18\% & 16  \\
+
+	% 137
+	\textbf{Q5}:\emph{How to reduce your carbon footprint?} & 20 & 11 & 160 & 14\% & 11 \\
+
+	% ???
+	\textbf{Q6}:\emph{How do I unclog my bathtub drain?} & 17 & 23 & 159 & 14\% & 11 \\
+	
+	\textbf{Wiki}: Talk page sections for the Wikipedia \emph{Hummus} article & N/A & N/A & 126 & 0\% & 13 \\ 
+	
+	\textbf{CSCW}: Abstract sections of CSCW 2015 accepted papers & N/A & N/A & 135 & 0\% & 45 \\ 
+    \hline
+  \end{tabular}
+  \caption{Datasets used for evaluation}
+  \label{tab:datasets}
+\end{table}
+
+\section{Evaluation}
+
+\subsection{Evaluation Metric and Datasets}
+\input{Chapters/Alloy/metric.tex}
+\input{Chapters/Alloy/data.tex}
+
+\subsection{External Validation, Robustness, and Generalizability}
+\input{Chapters/Alloy/exp.tex}
+
+\subsection{Experiment 1: External Validation}
+\input{Chapters/Alloy/exp1.tex}
+
+\begin{figure*}
+	\centering
+	\includegraphics[width=1\columnwidth]{Chapters/Alloy/images/numberOfTurkers.png}
+	\caption[Performance comparison of using different number of crowdworkers.]{Performance comparison of using different number of crowdworkers in the Head Cast and the Tail Cast.}
+	\label{fig:numberOfTurkers}
+\end{figure*}
+
+
+\subsection{Experiment 2: Robustness}
+\input{Chapters/Alloy/exp2.tex}
+\subsection{Experiment 3: Other Datasets}
+\input{Chapters/Alloy/exp4.tex}
+
+\section{Application: \textbf{Knowledge Accelerator}}
+\label{chap:ka}
+\input{Chapters/KA/short.tex}
+
+\section{Discussion}
+\input{Chapters/Alloy/conclusion.tex}
+
+%\section{Acknowledgements}
+%The authors would like to thank to Andrew Peters for the valuable discussions.
+%This work was supported by NSF grants IIS-1149797, IIS-0968484, IIS-1111124, Bosch, and Google. 
+
